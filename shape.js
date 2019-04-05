@@ -1,3 +1,5 @@
+console.log("Shape loaded");
+
 class Shape {
     constructor(name="default", points=[]) {
   	this.name   = name;

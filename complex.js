@@ -1,3 +1,4 @@
+console.log("Simplicial Complex loaded.")
 class SimplicialComplex {
     constructor(vertices=[]) {
   	this.vertices = vertices;
