@@ -14,16 +14,17 @@ $('document').ready(function( ) {
     $('.ui.shape.dropdown')
 	.dropdown({
 	    onChange: function(value){
+		samplePoints = [];
+		drawSample( );
 		$('.sample.button').removeClass("disabled");
 		switch(value) {
 		case "circle":
     		    shape = circle([width/2,height/2], 100);
-		    drawShape( );
 		    break;
 		case "infinity":
 		    shape = lemniscate([width/2,height/2],200);
-		    drawShape( );
 		}
+		drawShape( );
 	    }
 	})
     ;
@@ -40,6 +41,7 @@ $('document').ready(function( ) {
     
     $('.sample.button').click(function(){
   	samplePoints = sample(shape,$('.sample-tol').val( ),$('.sample-size').val( ));
+	$('.distance.label').html(H2(shape,samplePoints));
 	drawSample( );
     })
 });
@@ -47,6 +49,7 @@ $('document').ready(function( ) {
 
 // Draw Shape
 function drawShape( )	{
+    $('svg .shape').remove( );
     var line = d3.line( );
     svg.append("path")
 	.attr("class", "shape")
@@ -54,6 +57,7 @@ function drawShape( )	{
 }
 
 function drawSample( ) {
+    $('svg .sample').remove( );
     svg.selectAll(".sample")
 	.data(samplePoints).
 	enter( ).append("circle")
@@ -132,7 +136,7 @@ function H2(A,B) {
     A.forEach(function(a) {
    	var k=Infinity;
 	B.forEach(function(b) {
-      	    k = Math.min(k, norm2(a,b));
+      	    k = Math.min(k, dist2(a,b));
 	});
     	d = Math.max(d,k); 
     });
@@ -141,7 +145,7 @@ function H2(A,B) {
     B.forEach(function(b) {
    	var k=Infinity;
 	A.forEach(function(a) {
-      	    k = Math.min(k, norm2(a,b));
+      	    k = Math.min(k, dist2(a,b));
 	});
     	d = Math.max(d,k); 
     });

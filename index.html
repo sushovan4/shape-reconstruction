@@ -15,7 +15,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> 
     <!-- Call local js files -->
   <script src="complex.js"></script>   
-  <script src="script.js"></script>   
+  <script src="script.js"></script>
+  <!-- Mathjax for nice math symbols -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+  </script>
+  
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
   <!-- Styles -->
   <link rel="stylesheet" type="text/css" href="range.css"> 
   <link rel="stylesheet" type="text/css" href="style.css"> 
@@ -53,7 +62,10 @@
             <div style="text-align:center">
 	      Size: <div class="ui mini size label">50</div>
 	    </div>
-          </div>
+	    <br>
+	    $d_H(X,S)$=<div class="ui large distance label">_</div>
+	    <br><br>
+	  </div>
           <div class="field">
             <button class="ui green sample disabled button">
               Sample
