@@ -1,5 +1,3 @@
-console.log("Shape loaded");
-
 class Shape {
     constructor(name="default", points=[]) {
   	this.name   = name;
@@ -53,17 +51,17 @@ class Circle extends Shape {
   	this.range  = range;
   	this.size   = size;
     }
-  
-	generate(center, radius, range, n) {
-	    var t = d3.range(n).map(function(d) {
-  		return range.start + (range.end-range.start)*d/(n-1);
-  	    }); 
-  	    var points = [];
-  	    for(var i=0; i<n; i++) {
-  		points[i] = [center[0] + radius*Math.cos(2*Math.PI*t[i]), 
-  	            	     center[1] + radius*Math.sin(2*Math.PI*t[i])];
-  	    }
-	    return points;
-	} 
+    
+    generate(center, radius, range, n) {
+	var t = d3.range(n).map(function(d) {
+  	    return range.start + (range.end-range.start)*d/(n-1);
+  	}); 
+  	var points = [];
+  	for(var i=0; i<n; i++) {
+  	    points[i] = [center[0] + radius*Math.cos(2*Math.PI*t[i]), 
+  	            	 center[1] + radius*Math.sin(2*Math.PI*t[i])];
+  	}
+	return points;
+    } 
 }
 
