@@ -1,5 +1,9 @@
 .drawing {
 }
+.sample {
+    fill: #ggg;
+    stroke: none;
+}
 .shape {
     fill: none;
     stroke: #D2691E;

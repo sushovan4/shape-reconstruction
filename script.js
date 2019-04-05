@@ -1,5 +1,5 @@
 $('document').ready(function( ) {
-    shape = [], sample = [];    
+    shape = [], samplePoints = [];    
     var width = $('.drawing.segment').width( ), height = 300;
     
     svg = d3.select(".drawing.segment").append("svg")
@@ -13,7 +13,8 @@ $('document').ready(function( ) {
     
     $('.ui.shape.dropdown')
 	.dropdown({
-    	    onChange: function(value){
+	    onChange: function(value){
+		$('.sample.button').removeClass("disabled");
 		switch(value) {
 		case "circle":
     		    shape = circle([width/2,height/2], 100);
@@ -38,7 +39,8 @@ $('document').ready(function( ) {
     });
     
     $('.sample.button').click(function(){
-  	sample(tol, size);
+  	samplePoints = sample(shape,$('.sample-tol').val( ),$('.sample-size').val( ));
+	drawSample( );
     })
 });
 
@@ -50,8 +52,19 @@ function drawShape( )	{
 	.attr("class", "shape")
 	.attr("d", line(shape));
 }
+
+function drawSample( ) {
+    svg.selectAll(".sample")
+	.data(samplePoints).
+	enter( ).append("circle")
+	.attr("class", "sample")
+	.attr("cx", function(d) { return d[0] })
+	.attr("cy", function(d) { return d[1] })    
+	.attr("r", 4);
+}
+
 // Lemniscate 
-function lemniscate(center,a,n=100) {
+function lemniscate(center,a,n=200) {
     var t = d3.range(n).map(function(d) {
   	return 2*Math.PI*d/(n-1);
     });
@@ -64,7 +77,7 @@ function lemniscate(center,a,n=100) {
 }
 
 // Circle
-function circle(center, radius, range=[0,1], n=100) {
+function circle(center, radius, range=[0,1], n=200) {
     var t = d3.range(n).map(function(d) {
   	return range[0] + (range[1]-range[0])*d/(n-1);
     }); 
@@ -81,7 +94,12 @@ function sample(points,tol,size) {
     if(size > points.length)
 	return [];
     else
-	return d3.range(size).map(function(d){ return points[d3.uniformRandom(size)]; });
+	return d3.range(size).map(function( ) {
+	    var i = Math.floor(d3.randomUniform(points.length)( ));
+	    var r = d3.randomUniform(tol)( );
+	    var s = d3.randomUniform(2*Math.PI)( );
+	    return [points[i][0] + r*Math.cos(s), points[i][1] + r*Math.sin(s)];
+	});
 }
 
 // Compute distance of two points in 2D 
