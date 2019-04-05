@@ -16,30 +16,6 @@ class Shape {
  	return this;
     }
     
-    // Hausdorff distance
-    d_H( ) {
-  	var d=0;
-	if(this.points.length==0 || this.samplePoints.length==0)
-    	    d=Infinity;
-	
-   	// Distance Shape to Sample
-	this.points.forEach(function(x) {
-   	    var k=Infinity;
-	    this.samplePoints.forEach(function(s) {
-      		k = Math.min(k, Math.sqrt( (x[0]-s[0])^2 + (x[1]-s[1])^2 ));
-	    });
-    	    d = Math.max(d,k); 
-	});
-	// Distance Sample to Shape
-	this.samplePoints.forEach(function(s) {
-   	    var k=Infinity;
-	    this.points.forEach(function(x) {
-      		k = Math.min(k, Math.sqrt( (x[0]-s[0])^2 + (x[1]-s[1])^2 ));
-	    });
-    	    d = Math.max(d,k); 
-	});
-  	return d; 
-    }
 }  
 
 class Circle extends Shape {

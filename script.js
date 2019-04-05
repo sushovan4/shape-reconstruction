@@ -1,4 +1,6 @@
 $('document').ready(function( ) {
+    var shape;
+    
     $('.ui.dropdown')
 	.dropdown()
     ;
@@ -6,7 +8,10 @@ $('document').ready(function( ) {
     $('.ui.shape.dropdown')
 	.dropdown({
     	    onChange: function(value){
-    		shape = Shape[value]([0,1]);
+		switch(value) {
+		case "circle":
+    		    shape = new Circle([10,10],50);
+		}
     		console.log(shape);
             },
 	})

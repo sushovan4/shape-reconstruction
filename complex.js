@@ -72,6 +72,34 @@ function diam2(points) {
     return diam;
 }
 
+// Compute Hausdorff distance in 2D
+function H2(A,B) {
+    var d=0;
+    
+    // Return if the sets are empty
+    if(A.length==0 || B.length==0)
+    	return null;
+    
+    // Distance A to B
+    A.forEach(function(a) {
+   	var k=Infinity;
+	B.forEach(function(b) {
+      	    k = Math.min(k, norm2(a,b));
+	});
+    	d = Math.max(d,k); 
+    });
+    
+    // Distance B to A
+    B.forEach(function(b) {
+   	var k=Infinity;
+	A.forEach(function(a) {
+      	    k = Math.min(k, norm2(a,b));
+	});
+    	d = Math.max(d,k); 
+    });
+    return d; 
+}
+
 // Compute all combinations of k elements from a set
 function combinations(set, k) {
     var i, j, combs, head, tailcombs;
