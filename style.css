@@ -1,0 +1,8 @@
+.drawing {
+    border: 1px solid #eee;
+}
+.shape {
+    fill: none;
+    stroke: #D2691E;
+    stroke-width: 2;
+}
