@@ -1,13 +1,12 @@
 $('document').ready(function( ) {
-    var shape;
-    
+    shape = [], sample = [];    
     var width = $('.drawing.segment').width( ), height = 300;
     
-    var svg = d3.select(".drawing.segment").append("svg")
+    svg = d3.select(".drawing.segment").append("svg")
 	.attr("width", width+"px")
 	.attr("height", height+"px")
 	.attr("class", "drawing");
-    
+
     $('.ui.dropdown')
 	.dropdown()
     ;
@@ -18,11 +17,10 @@ $('document').ready(function( ) {
 		switch(value) {
 		case "circle":
     		    shape = circle([width/2,height/2], 100);
-		    var line = d3.line( );
-		    svg.append("path")
-			.attr("class", "shape")
-			.attr("d", line(shape));
-		    
+		    drawShape( );
+		case "infinity":
+		    shape = lemniscate([width/2,height/2],200);
+		    drawShape( );
 		}
 	    }
 	})
@@ -44,7 +42,27 @@ $('document').ready(function( ) {
 });
 
 
-// Draw a circle
+// Draw Shape
+function drawShape( )	{
+    var line = d3.line( );
+    svg.append("path")
+	.attr("class", "shape")
+	.attr("d", line(shape));
+}
+// Lemniscate 
+function lemniscate(center,a,n=100) {
+    var t = d3.range(n).map(function(d) {
+  	return 2*Math.PI*d/(n-1);
+    });
+    var points = [];
+    for(var i=0; i<n; i++) {
+  	points[i] = [center[0] + a*Math.cos(t[i])/(1 + Math.pow(Math.sin(t[i]),2)), 
+  	             center[1] + a*Math.sin(t[i])*Math.cos(t[i])/(1 + Math.pow(Math.sin(t[i]),2))];
+    }
+    return points;
+}
+
+// Circle
 function circle(center, radius, range=[0,1], n=100) {
     var t = d3.range(n).map(function(d) {
   	return range[0] + (range[1]-range[0])*d/(n-1);
