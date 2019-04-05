@@ -18,6 +18,7 @@ $('document').ready(function( ) {
 		case "circle":
     		    shape = circle([width/2,height/2], 100);
 		    drawShape( );
+		    break;
 		case "infinity":
 		    shape = lemniscate([width/2,height/2],200);
 		    drawShape( );
