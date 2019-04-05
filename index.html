@@ -1,3 +1,57 @@
-<html>
-        <h1>Sush</h1>
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"> <!-- Unicode suppport -->
+  <!-- Normalize device width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title of the page -->
+  <title>Line (using curveCardinal)</title>
+  <!-- Call JQuery Library -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <!-- Call Semantic UI for CSS styling and JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <!-- Call D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> 
+</head>
+
+<body>
+  <div class="ui container basic segment">
+    <h1 class="ui dividing green header">Shape Reconstruction</h1>
+  </div>
+  
+  <div class="ui green segment container">
+    <div class="ui form">
+      <div class="four wide field">
+        <label>Select a Shape</label>
+        <!-- Shape Selection -->
+        <select class="ui shape selection dropdown">
+           Select a Shape
+          <i class="dropdown icon"></i>
+           <option class="item" value="">Shape</option>
+           <option class="item" value="circle">Circle</option>
+           <option class="item" value="infinity">Infinity</option>
+         </select>
+      </div>
+    
+      <div class="three fields">
+        <div class="field">
+          <label>Tolerance <div class="ui green tol label">5</div></label>
+          <input type="range" min="0" max="10" step="1" value="5" class="sample-tol">
+        </div>
+        <div class="field">
+          <label>Size <div class="ui green size label">50</div></label>
+          <input type="range" min="0" max="1000" step="10" value="50" class="sample-size">
+        </div>
+        <div class="field">
+          <button class="ui green sample button">
+            Sample
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="ui drawing segment container"></div>
+</body>
 </html>
