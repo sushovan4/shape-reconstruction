@@ -18,6 +18,9 @@ $('document').ready(function( ) {
     $('.sample-size').change(function(){
   	$('.ui.size.label').html($(this).val( ));
     });
+    $('.scale').change(function(){
+  	$('.ui.scale.label').html($(this).val( ));
+    });
     
     $('.sample.button').click(function(){
   	sample(tol, size);

@@ -18,14 +18,15 @@
   <script src="shape.js"></script>   
   <script src="complex.js"></script>   
   <script src="script.js"></script>   
+  
+  <!-- Styles -->
+   <link rel="stylesheet" type="text/css" href="range.css"> 
 </head>
 
 <body>
-  <div class="ui container basic segment">
+  <br>
+  <div class="ui segment container">
     <h1 class="ui dividing green header">Shape Reconstruction</h1>
-  </div>
-  
-  <div class="ui green segment container">
     <div class="ui form">
       <div class="four wide field">
         <label><div class="ui large green circular label">1</div> Select a Shape</label>
@@ -43,20 +44,47 @@
       <div class="field">
 	<label><div class="ui large green circular label">2</div> Sample the shape</label>
 	<div class="fields">
-          <div class="field">
+          <div class="six wide field">
             <input type="range" min="0" max="10" step="1" value="5" class="sample-tol">
-           <br> Tolerance: <div class="ui mini tol label">5</div>
-          </div>
-          <div class="field">
+            <div style="text-align:center">
+	      Tolerance: <span class="ui mini tol label">5</span>
+            </div>
+	  </div>
+          <div class="six wide field">
             <input type="range" min="0" max="1000" step="10" value="50" class="sample-size">
-            <br>Size: <div class="ui mini size label">50</div>
+            <div style="text-align:center">
+	      Size: <div class="ui mini size label">50</div>
+	    </div>
           </div>
           <div class="field">
-            <button class="ui green sample button">
-              Sample the Shape
+            <button class="ui green basic sample button">
+              Sample
             </button>
           </div>
 	</div>
+      </div>
+
+      <div class="ui divider"></div>
+      <div class="field">
+	<label><div class="ui large green circular label">3</div> Build a complex</label>
+	<div class="fields">
+          <div class="twelve wide field">
+            <input type="range" width="200px" min="0" max="100" step="1" value="5" class="scale">
+            <div style="text-align:center">
+	      Scale: <div class="ui mini scale label">5</div>
+	    </div>
+          </div>
+          <div class="field">
+	    <!-- Complex Selection -->
+	    <select class="ui complex selection dropdown">
+	      Select a Complex
+	      <i class="dropdown icon"></i>
+	      <option class="item" value="cech" selected>Cech Complex</option>
+	      <option class="item" value="rips">Rips Complex</option>
+	    </select> 
+          </div>
+	</div>
+	
       </div>
     </div>
   </div>
