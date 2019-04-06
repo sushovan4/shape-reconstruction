@@ -21,8 +21,11 @@ $('document').ready(function( ) {
 		case "circle":
     		    shape = circle([width/2,height/2], 100);
 		    break;
-		case "infinity":
+		case "lemniscate":
 		    shape = lemniscate([width/2,height/2],200);
+		    break;
+		case "lissajous":
+		    shape = lissajous([width/2,height/2]);
 		}
 		drawShape( );
 	    }
@@ -75,7 +78,6 @@ function rips(points, scale) {
     	if ( diam2( d3.permute(points,d) ) < scale )
     	    simplices[2].push(d);
     });
-    console.log(simplices[2]);
     return simplices;
 }
 
@@ -132,8 +134,21 @@ function drawSample( ) {
 	.attr("r", 2);
 }
 
+// Lissajous
+function lissajous(center,a=100,b=100,kx=3,ky=2,n=200) {
+    var t = d3.range(n).map(function(d) {
+  	return 2*Math.PI*d/(n-1);
+    });
+    var points = [];
+    for(var i=0; i<n; i++) {
+  	points[i] = [center[0] + a*Math.cos(kx*t[i]), 
+  	             center[1] + b*Math.sin(ky*t[i])];
+    }
+    return points;
+}
+
 // Lemniscate 
-function lemniscate(center,a,n=200) {
+function lemniscate(center,a,n=100) {
     var t = d3.range(n).map(function(d) {
   	return 2*Math.PI*d/(n-1);
     });
