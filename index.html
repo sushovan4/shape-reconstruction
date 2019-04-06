@@ -14,7 +14,6 @@
   <!-- Call D3 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> 
     <!-- Call local js files -->
-  <script src="complex.js"></script>   
   <script src="script.js"></script>
   <!-- Mathjax for nice math symbols -->
   <script type="text/x-mathjax-config">
@@ -33,10 +32,10 @@
 <body>
   <br>
   <div class="ui segment container">
-    <h1 class="ui dividing green header">Shape Reconstruction</h1>
+    <h1 class="ui dividing green header">Topological Shape Reconstruction</h1>
     <div class="ui form">
       <div class="four wide field">
-        <label><div class="ui large green circular label">1</div> Select a Shape</label>
+        <label><div class="ui large green circular label">1</div> Select a Shape $(X)$</label>
         <!-- Shape Selection -->
         <select class="ui shape selection dropdown">
            Select a Shape
@@ -49,7 +48,7 @@
 
       <div class="ui divider"></div>
       <div class="field">
-	<label><div class="ui large green circular label">2</div> Sample the shape</label>
+	<label><div class="ui large green circular label">2</div> Sample the shape $(S)$</label>
 	<div class="fields">
           <div class="six wide field">
             <input type="range" min="0" max="30" step="1" value="0" class="sample-tol">
@@ -76,7 +75,9 @@
 
       <div class="ui divider"></div>
       <div class="field">
-	<label><div class="ui large green circular label">3</div> Build a complex</label>
+	<label><div class="ui large green circular label">3</div>
+	  Build a complex $(\mathcal{K})$
+	</label>
 	<div class="fields">
           <div class="twelve wide field">
             <input type="range" width="200px" min="0" max="100" step="1" value="0" class="scale">
@@ -89,8 +90,8 @@
 	    <select class="ui complex selection dropdown">
 	      Select a Complex
 	      <i class="dropdown icon"></i>
-	      <option class="item" value="cech" selected>Cech Complex</option>
-	      <option class="item" value="rips">Rips Complex</option>
+	      <option class="item" value="cech">Čech Complex</option>
+	      <option class="item" value="rips" selected>Rips Complex</option>
 	    </select> 
           </div>
 	</div>

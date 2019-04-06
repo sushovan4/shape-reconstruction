@@ -5,10 +5,20 @@
     stroke: none;
 }
 .ball {
-    opacity: 0.4;
+    opacity: 0.2;
     fill: #5ddd7b;
     stroke: #21ba45;
     stroke-width: 2;
+}
+.edge {
+    fill: none;
+    stroke: #1946A1;
+    stroke-width: 2;
+}
+.triangle {
+    stroke: none;
+    opacity: 0.3;
+    fill: #6189DB;
 }
 .shape {
     fill: none;

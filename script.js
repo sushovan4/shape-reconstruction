@@ -1,5 +1,5 @@
 $('document').ready(function( ) {
-    shape = [], samplePoints = [];    
+    shape = [], samplePoints = []; simplices = [];
     var width = $('.drawing.segment').width( ), height = 300;
     
     svg = d3.select(".drawing.segment").append("svg")
@@ -32,6 +32,8 @@ $('document').ready(function( ) {
     $('input.scale')
 	.change(function( ){
 	    drawBalls($(this).val( ));
+	    simplices = rips(samplePoints, 2*$(this).val( ));
+	    drawComplex( );
 	})
     ;
     
@@ -51,6 +53,52 @@ $('document').ready(function( ) {
 	drawSample( );
     })
 });
+
+// Computes Cech Complex
+function cech(points, scale) {
+    
+}
+
+// Compute Rips Complex
+function rips(points, scale) {
+    var simplices = [];
+    simplices[0]  = d3.range(points.length);
+    simplices[1]  = [];
+    simplices[2]  = [];
+    
+    combinations(simplices[0],2).forEach(function(d) {
+    	if ( diam2( d3.permute(points,d) ) < scale )
+    	    simplices[1].push(d);
+    });
+    
+    combinations(simplices[0],3).forEach(function(d) {
+    	if ( diam2( d3.permute(points,d) ) < scale )
+    	    simplices[2].push(d);
+    });
+    console.log(simplices[2]);
+    return simplices;
+}
+
+// Draw Complex
+function drawComplex( ) {
+    $('svg .edge').remove( );
+    $('svg .triangle').remove( );
+    svg.selectAll(".edge")
+	.data(simplices[1])
+	.enter( ).append("line")
+	.attr("class", "edge")
+	.attr("x1", function(d) { return samplePoints[d[0]][0] })
+	.attr("y1", function(d) { return samplePoints[d[0]][1] })
+    	.attr("x2", function(d) { return samplePoints[d[1]][0] })
+	.attr("y2", function(d) { return samplePoints[d[1]][1] })
+
+    simplices[2].forEach(function(t) {
+    var line = d3.line( );
+	svg.append("path")
+	    .attr("class", "triangle")
+	    .attr("d", line(d3.permute(samplePoints, t)));
+    });
+}
 
 // Draw Balls
 function drawBalls(radius) {
