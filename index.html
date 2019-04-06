@@ -4,7 +4,7 @@
   <!-- Normalize device width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Title of the page -->
-  <title>Shape Reconstruction</title>
+  <title>Topological Shape Reconstruction</title>
   <!-- Call JQuery Library -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -21,72 +21,61 @@
     tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
     });
   </script>
-  
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
-  <!-- Styles -->
+  <!-- My Styles -->
   <link rel="stylesheet" type="text/css" href="range.css"> 
   <link rel="stylesheet" type="text/css" href="style.css"> 
 </head>
 
 <body>
-  <br>
-  <div class="ui segment container">
-    <h1 class="ui dividing green header">Topological Shape Reconstruction</h1>
-    <div class="ui form">
-      <div class="four wide field">
-        <label><div class="ui large green circular label">1</div> Select a Shape $(X)$</label>
-        <!-- Shape Selection -->
-        <select class="ui shape selection dropdown">
-           Select a Shape
-          <i class="dropdown icon"></i>
-           <option class="item" value="">Shape</option>
-           <option class="item" value="circle">Circle</option>
-           <option class="item" value="lissajous">Lissajous</option>
-           <option class="item" value="lemniscate">Lemniscate</option>
-         </select>
-      </div>
-
-      <div class="ui divider"></div>
-      <div class="field">
-	<label><div class="ui large green circular label">2</div> Sample the shape $(S)$</label>
-	<div class="fields">
-          <div class="six wide field">
-            <input type="range" min="0" max="30" step="1" value="0" class="sample-tol">
-            <div style="text-align:center">
-	      Tolerance: <span class="ui mini tol label">0</span>
-            </div>
-	  </div>
-          <div class="six wide field">
-            <input type="range" min="0" max="200" step="10" value="50" class="sample-size">
-            <div style="text-align:center">
-	      Size: <div class="ui mini size label">50</div>
+  <div class="ui inverted basic padded segment" style="margin-top:0;min-height:100vh">
+    <div class="ui fluid container">
+      <div class="ui stackable divided grid">
+	<div class="row">
+	  <div class="six wide center aligned column">
+	    <h1 class="ui dividing inverted header">Topological Shape Reconstruction</h1>
+            <div class="ui inverted header">Sample 
+              <!-- Shape Selection -->
+              <div class="ui shape inline dropdown">
+		<div class="text">$\mathbb{R}^2$</div>
+		<i class="dropdown icon"></i>
+		<div class="menu">
+		  <div class="item" data-value="">$\mathbb{R}^2$</div>
+		  <div class="item" data-value="circle">a Circle</div>
+		  <div class="item" data-value="lissajous">a Lissajous</div>
+		  <div class="item" data-value="lemniscate">a Lemniscate</div>
+		</div>
+	      </div>
 	    </div>
-	    <br>
-	    $d_H(X,S)$=<div class="ui large distance label">_</div>
-	    <br><br>
-	  </div>
-          <div class="field">
-            <button class="ui green sample disabled button">
-              Sample
-            </button>
-          </div>
-	</div>
-      </div>
-
-      <div class="ui divider"></div>
-      <div class="field">
-	<label><div class="ui large green circular label">3</div>
-	  Build a complex $(\mathcal{K})$
-	</label>
-	<div class="fields">
-          <div class="twelve wide field">
-            <input type="range" width="200px" min="0" max="100" step="1" value="0" class="scale">
-            <div style="text-align:center">
+	    
+	    <!-- Noise Selection -->
+	    <h5 class="ui inverted header">
+	      <input type="range" min="0" max="30" step="1" value="0" class="sample-tol">
+	      Noise <span class="ui tol label">0</span>
+	    </h5>
+	    
+	    <!-- Sample Size Selection -->
+	    <h5 class="ui inverted header">
+      	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size">
+	      Size: <div class="ui mini size label">10</div>
+	    </h5>
+	    
+	    <!-- Display Hausdorff distance -->
+	    <h5 class="ui inverted header">
+	      $d_H(X,S)$=<span class="ui large distance label">_</span>
+	    </h5>
+	    
+	    <button class="ui green sample button">
+	      Sample
+	    </button>
+	    
+	    <div class="ui horizontal inverted divider">Build Complex</div>
+	    <input type="range"  min="0" max="200" step="5" value="0" class="scale">
+	    <div style="text-align:center">
 	      Scale: <div class="ui mini scale label">0</div>
 	    </div>
-          </div>
-          <div class="field">
+	    
 	    <!-- Complex Selection -->
 	    <select class="ui complex selection dropdown">
 	      Select a Complex
@@ -94,13 +83,14 @@
 	      <option class="item" value="cech">Čech Complex</option>
 	      <option class="item" value="rips" selected>Rips Complex</option>
 	    </select> 
-          </div>
+     	  </div>
+     	  
+	  <div class="ten wide  column">
+	    <div class="ui drawing segment"></div>
+	  </div>
 	</div>
-	
       </div>
     </div>
   </div>
-  
-  <div class="ui drawing segment container"></div>
 </body>
 </html>

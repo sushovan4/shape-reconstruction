@@ -1,6 +1,6 @@
 $('document').ready(function( ) {
     shape = [], samplePoints = []; simplices = [];
-    var width = $('.drawing.segment').width( ), height = 300;
+    width = $('.drawing.segment').width( ), height = $('.drawing.segment').height( );
     
     svg = d3.select(".drawing.segment").append("svg")
 	.attr("width", width+"px")
@@ -13,19 +13,21 @@ $('document').ready(function( ) {
     
     $('.ui.shape.dropdown')
 	.dropdown({
-	    onChange: function(value){
+	    onChange: function(value,text){
+		shape = [];
 		samplePoints = [];
-		drawSample( );
+		simplices = [];
+
 		$('.sample.button').removeClass("disabled");
 		switch(value) {
 		case "circle":
-    		    shape = circle([width/2,height/2], 100);
+    		    shape = circle([width/2,height/2], Math.min(width,height)/2-70);
 		    break;
 		case "lemniscate":
-		    shape = lemniscate([width/2,height/2],200);
+		    shape = lemniscate([width/2,height/2],width/2-50);
 		    break;
 		case "lissajous":
-		    shape = lissajous([width/2,height/2]);
+		    shape = lissajous([width/2,height/2], width/2-30, height/2-30);
 		}
 		drawShape( );
 	    }
@@ -51,9 +53,7 @@ $('document').ready(function( ) {
     });
     
     $('.sample.button').click(function(){
-  	samplePoints = sample(shape,$('.sample-tol').val( ),$('.sample-size').val( ));
-	$('.distance.label').html(H2(shape,samplePoints));
-	drawSample( );
+  	sample($('.sample-tol').val( ),$('.sample-size').val( ));
     })
 });
 
@@ -174,17 +174,31 @@ function circle(center, radius, range=[0,1], n=200) {
 }
 
 // Sample a set with noise
-function sample(points,tol,size) {
-    if(size > points.length)
-	return [];
-    else
-	return d3.range(size).map(function( ) {
-	    var i = Math.floor(d3.randomUniform(points.length)( ));
-	    var r = d3.randomUniform(tol)( );
-	    var s = d3.randomUniform(2*Math.PI)( );
-	    return [points[i][0] + r*Math.cos(s), points[i][1] + r*Math.sin(s)];
+function sample(tol,size) {
+    if( shape.length==0 ) {
+	samplePoints =  d3.range(size).map(function( ) {
+	    var x = d3.randomUniform(0,width)( );
+	    var y = d3.randomUniform(0,height)( );
+	    return [x,y];	
 	});
+    }
+    
+    else {
+	if(size > shape.length)
+	    return [];
+	else
+	    samplePoints =  d3.range(size).map(function( ) {
+		var i = Math.floor(d3.randomUniform(shape.length)( ));
+		var r = d3.randomUniform(tol)( );
+		var s = d3.randomUniform(2*Math.PI)( );
+		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
+	    });
+	
+    }
+    $('.distance.label').html(H2(shape,samplePoints));
+    drawSample( );
 }
+
 
 // Compute distance of two points in 2D 
 function dist2(a,b){
