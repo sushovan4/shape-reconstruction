@@ -29,13 +29,19 @@ $('document').ready(function( ) {
 	})
     ;
     
-    $('.sample-tol').change(function(){
+    $('input.scale')
+	.change(function( ){
+	    drawBalls($(this).val( ));
+	})
+    ;
+    
+    $('input.sample-tol').change(function(){
   	$('.ui.tol.label').html($(this).val( ));
     });
-    $('.sample-size').change(function(){
+    $('input.sample-size').change(function(){
   	$('.ui.size.label').html($(this).val( ));
     });
-    $('.scale').change(function(){
+    $('input.scale').change(function(){
   	$('.ui.scale.label').html($(this).val( ));
     });
     
@@ -46,6 +52,17 @@ $('document').ready(function( ) {
     })
 });
 
+// Draw Balls
+function drawBalls(radius) {
+    $('svg .ball').remove( );
+    svg.selectAll(".ball")
+	.data(samplePoints)
+	.enter( ).append("circle")
+	.attr("class", "ball")
+	.attr("cx", function(d) { return d[0] })
+	.attr("cy", function(d) { return d[1] })    
+	.attr("r", radius);	
+}
 
 // Draw Shape
 function drawShape( )	{
@@ -64,7 +81,7 @@ function drawSample( ) {
 	.attr("class", "sample")
 	.attr("cx", function(d) { return d[0] })
 	.attr("cy", function(d) { return d[1] })    
-	.attr("r", 4);
+	.attr("r", 2);
 }
 
 // Lemniscate 

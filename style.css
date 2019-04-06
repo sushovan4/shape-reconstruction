@@ -4,6 +4,12 @@
     fill: #ggg;
     stroke: none;
 }
+.ball {
+    opacity: 0.4;
+    fill: #63ddbd;
+    stroke: #2bad8b;
+    stroke-width: 2;
+}
 .shape {
     fill: none;
     stroke: #D2691E;
