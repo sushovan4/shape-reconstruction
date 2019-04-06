@@ -5,15 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Title of the page -->
   <title>Topological Shape Reconstruction</title>
+  <!-- Call D3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script> 
   <!-- Call JQuery Library -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  	  crossorigin="anonymous">
+  </script>
   <!-- Call Semantic UI for CSS styling and JS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-  <!-- Call D3 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script> 
-    <!-- Call local js files -->
+  <!-- Call local js files -->
   <script src="script.js"></script>
   <!-- Mathjax for nice math symbols -->
   <script type="text/x-mathjax-config">
@@ -38,7 +40,7 @@
             <div class="ui inverted header">Sample 
               <!-- Shape Selection -->
               <div class="ui shape inline dropdown">
-		<div class="text">$\mathbb{R}^2$</div>
+		<div class="text" style="color: pink"></div>
 		<i class="dropdown icon"></i>
 		<div class="menu">
 		  <div class="item" data-value="">$\mathbb{R}^2$</div>
@@ -70,20 +72,23 @@
 	      Sample
 	    </button>
 	    
-	    <div class="ui horizontal inverted divider">Build Complex</div>
+	    <div class="ui horizontal inverted divider">
+	      Build
+	      <!-- Complex Selection -->
+	      <div class="ui complex inline dropdown">
+		<div class="text" style="color: pink"></div>
+		<i class="dropdown icon"></i>
+		<div class="menu">
+		  <div class="active item" data-value="rips">Rips Complex</div>
+		  <div class="item" data-value="cech">Čech Complex</div>
+		</div>
+	      </div>
+	    </div>
 	    <input type="range"  min="0" max="200" step="5" value="0" class="scale">
 	    <div style="text-align:center">
 	      Scale: <div class="ui mini scale label">0</div>
 	    </div>
-	    
-	    <!-- Complex Selection -->
-	    <select class="ui complex selection dropdown">
-	      Select a Complex
-	      <i class="dropdown icon"></i>
-	      <option class="item" value="cech">Čech Complex</option>
-	      <option class="item" value="rips" selected>Rips Complex</option>
-	    </select> 
-     	  </div>
+	  </div>
      	  
 	  <div class="ten wide  column">
 	    <div class="ui drawing segment"></div>

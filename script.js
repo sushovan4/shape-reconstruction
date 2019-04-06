@@ -1,84 +1,148 @@
+/* Author: Sushovan Majhi (www.smajhi.com)
+   Date: April 4, 2019
+   ...
+*/
+
 $('document').ready(function( ) {
-    shape = [], samplePoints = []; simplices = [];
-    width = $('.drawing.segment').width( ), height = $('.drawing.segment').height( );
+    // Globals
+    shape = [];
+    sample = [];
+    simplices = [];
+    width  = $('.drawing.segment').width( );
+    height = $('.drawing.segment').height( );
     
+    // Create main svg element
     svg = d3.select(".drawing.segment").append("svg")
-	.attr("width", width+"px")
-	.attr("height", height+"px")
-	.attr("class", "drawing");
-
+    	.attr("width", width+"px")
+    	.attr("height", height+"px");
+    
+    // Initialize dropdown as needed by Semantic-UI
     $('.ui.dropdown')
-	.dropdown()
+    	.dropdown()
     ;
-    
-    $('.ui.shape.dropdown')
-	.dropdown({
-	    onChange: function(value,text){
-		shape = [];
-		samplePoints = [];
-		simplices = [];
 
-		$('.sample.button').removeClass("disabled");
-		switch(value) {
-		case "circle":
-    		    shape = circle([width/2,height/2], Math.min(width,height)/2-70);
-		    break;
-		case "lemniscate":
-		    shape = lemniscate([width/2,height/2],width/2-50);
-		    break;
-		case "lissajous":
-		    shape = lissajous([width/2,height/2], width/2-30, height/2-30);
-		}
-		drawShape( );
-	    }
-	})
+    $('.ui.complex.dropdown')
+    	.dropdown('set selected', 'rips');
     ;
     
+    // Callback when a new shape is chosen
+    $('.ui.shape.dropdown')
+    	.dropdown({
+    	    onChange: function(value){
+    		if(value != "")
+		    selectShape(value);
+    	    }
+    	})
+    ;
+    
+    // Resample the shape
+    $('.sample.button').click(function(){
+	reSample($('.sample-tol').val( ), $('.sample-size').val( ));
+    });
+    
+    
+    // Callback when scale is changed
     $('input.scale')
-	.change(function( ){
-	    drawBalls($(this).val( ));
-	    simplices = rips(samplePoints, 2*$(this).val( ));
-	    drawComplex( );
-	})
+    	.change(function( ){
+    	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
+    	})
     ;
     
+    // Other DOM callbacks
     $('input.sample-tol').change(function(){
-  	$('.ui.tol.label').html($(this).val( ));
+    	$('.ui.tol.label').html($(this).val( ));
     });
     $('input.sample-size').change(function(){
-  	$('.ui.size.label').html($(this).val( ));
+    	$('.ui.size.label').html($(this).val( ));
     });
     $('input.scale').change(function(){
-  	$('.ui.scale.label').html($(this).val( ));
-    });
-    
-    $('.sample.button').click(function(){
-  	sample($('.sample-tol').val( ),$('.sample-size').val( ));
-    })
+    	$('.ui.scale.label').html($(this).val( ));
+    });   
 });
 
-// Computes Cech Complex
-function cech(points, scale) {
+// Compute new shape
+function selectShape(name)	{
+    sample = [];
+    simplices = [];
     
+    switch(name) {
+    case "circle":
+    	shape = circle([width/2,height/2], Math.min(width,height)/2-70);
+    	break;
+    case "lemniscate":
+    	shape = lemniscate([width/2,height/2],width/2-50);
+    	break;
+    case "lissajous":
+    	shape = lissajous([width/2,height/2], width/2-30, height/2-30);
+    }
+    
+    $('svg .shape').remove( );
+    var line = d3.line( );
+    svg.append("path")
+	.attr("class", "shape")
+	.attr("d", line(shape));
+    console.log("Shape: "+name);
+    console.log(shape);   
 }
 
-// Compute Rips Complex
-function rips(points, scale) {
-    var simplices = [];
-    simplices[0]  = d3.range(points.length);
-    simplices[1]  = [];
-    simplices[2]  = [];
+
+// Sample the shape
+function reSample(tol,size) {
+    simplices = [];
     
-    combinations(simplices[0],2).forEach(function(d) {
-    	if ( diam2( d3.permute(points,d) ) < scale )
-    	    simplices[1].push(d);
-    });
+    if( shape.length==0 ) {
+	sample =  d3.range(size).map(function( ) {
+	    var x = d3.randomUniform(0,width)( );
+	    var y = d3.randomUniform(0,height)( );
+	    return [x,y];	
+	});
+    }
     
-    combinations(simplices[0],3).forEach(function(d) {
-    	if ( diam2( d3.permute(points,d) ) < scale )
-    	    simplices[2].push(d);
-    });
-    return simplices;
+    else {
+	if(size > shape.length)
+	    return [];
+	else
+	    sample =  d3.range(size).map(function( ) {
+		var i = Math.floor(d3.randomUniform(shape.length)( ));
+		var r = d3.randomUniform(tol)( );
+		var s = d3.randomUniform(2*Math.PI)( );
+		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
+	    });
+	
+    }
+    // Update Hausdorff distance
+    $('.distance.label').html(H2(shape,sample));
+    // Redraw sample on svg
+    svg.selectAll(".sample")
+    	.data(sample)
+    	.join("circle")
+    	.attr("class", "sample")
+    	.attr("cx", function(d) { return d[0] })
+    	.attr("cy", function(d) { return d[1] })    
+    	.attr("r", 3)
+}
+
+// Computes Complexes
+var Complex = {
+    rips: function(scale) {
+	simplices[0]  = d3.range(sample.length);
+	simplices[1]  = [];
+	simplices[2]  = [];
+	
+	combinations(simplices[0],2).forEach(function(d) {
+    	    if ( diam2( d3.permute(sample,d) ) < scale )
+    		simplices[1].push(d);
+	});
+	
+	combinations(simplices[0],3).forEach(function(d) {
+    	    if ( diam2( d3.permute(sample,d) ) < scale )
+    		simplices[2].push(d);
+	});
+	drawComplex( );
+    },
+    cech: function(scale) {
+	console.log("I am not yet defined");
+    }   
 }
 
 // Draw Complex
@@ -89,16 +153,16 @@ function drawComplex( ) {
 	.data(simplices[1])
 	.enter( ).append("line")
 	.attr("class", "edge")
-	.attr("x1", function(d) { return samplePoints[d[0]][0] })
-	.attr("y1", function(d) { return samplePoints[d[0]][1] })
-    	.attr("x2", function(d) { return samplePoints[d[1]][0] })
-	.attr("y2", function(d) { return samplePoints[d[1]][1] })
+	.attr("x1", function(d) { return sample[d[0]][0] })
+	.attr("y1", function(d) { return sample[d[0]][1] })
+    	.attr("x2", function(d) { return sample[d[1]][0] })
+	.attr("y2", function(d) { return sample[d[1]][1] })
 
     simplices[2].forEach(function(t) {
     var line = d3.line( );
 	svg.append("path")
 	    .attr("class", "triangle")
-	    .attr("d", line(d3.permute(samplePoints, t)));
+	    .attr("d", line(d3.permute(sample, t)));
     });
 }
 
@@ -114,25 +178,7 @@ function drawBalls(radius) {
 	.attr("r", radius);	
 }
 
-// Draw Shape
-function drawShape( )	{
-    $('svg .shape').remove( );
-    var line = d3.line( );
-    svg.append("path")
-	.attr("class", "shape")
-	.attr("d", line(shape));
-}
 
-function drawSample( ) {
-    $('svg .sample').remove( );
-    svg.selectAll(".sample")
-	.data(samplePoints).
-	enter( ).append("circle")
-	.attr("class", "sample")
-	.attr("cx", function(d) { return d[0] })
-	.attr("cy", function(d) { return d[1] })    
-	.attr("r", 2);
-}
 
 // Lissajous
 function lissajous(center,a=100,b=100,kx=3,ky=2,n=200) {
@@ -172,33 +218,6 @@ function circle(center, radius, range=[0,1], n=200) {
     }
     return points;
 }
-
-// Sample a set with noise
-function sample(tol,size) {
-    if( shape.length==0 ) {
-	samplePoints =  d3.range(size).map(function( ) {
-	    var x = d3.randomUniform(0,width)( );
-	    var y = d3.randomUniform(0,height)( );
-	    return [x,y];	
-	});
-    }
-    
-    else {
-	if(size > shape.length)
-	    return [];
-	else
-	    samplePoints =  d3.range(size).map(function( ) {
-		var i = Math.floor(d3.randomUniform(shape.length)( ));
-		var r = d3.randomUniform(tol)( );
-		var s = d3.randomUniform(2*Math.PI)( );
-		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
-	    });
-	
-    }
-    $('.distance.label').html(H2(shape,samplePoints));
-    drawSample( );
-}
-
 
 // Compute distance of two points in 2D 
 function dist2(a,b){
@@ -272,3 +291,4 @@ function combinations(set, k) {
     }
     return combs
 }
+
