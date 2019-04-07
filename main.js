@@ -10,8 +10,9 @@ $('document').ready(function( ) {
     simplices = [];
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
-    shapeVisible = true;
-    ballsVisible = true;
+    shapeVisible =   true;
+    ballsVisible =   true;
+    complexVisible = true;
     
     // Create main svg element
     svg = d3.select(".drawing.segment").append("svg")
@@ -46,20 +47,43 @@ $('document').ready(function( ) {
     // Callback when scale is changed
     $('input.scale')
     	.change(function( ){
+	    // Compute and draw the simplicial complex
     	    Complex[$('.complex.dropdown').dropdown('get value')](2*$(this).val( ));
-	    drawBalls($(this).val( ));
     	})
     ;
     
     // Other DOM events and callbacks
     $('.shape.checkbox').checkbox({
-	onChecked:   function( ) { shapeVisible = true; },
-	onUnchecked: function( ) { shapeVisible = false; } 
+	onChecked:   function( ) {
+	    shapeVisible = true;
+	    drawShape( );
+	},
+	onUnchecked: function( ) {
+	    shapeVisible = false;
+	    eraseShape( );
+	} 
     });
     
     $('.balls.checkbox').checkbox({
-	onChecked:   function( ){ ballsVisible = true; },
-	onUnchecked: function( ){ ballsVisible = false; } 
+	onChecked:   function( ){
+	    ballsVisible = true;
+	    drawBalls( );
+	},
+	onUnchecked: function( ){
+	    ballsVisible = false;
+	    eraseBalls( );
+	} 
+    });
+    
+    $('.complex.checkbox').checkbox({
+	onChecked:   function( ) {
+	    complexVisible = true;
+	    drawComplex( );
+	},
+	onUnchecked: function( ) {
+	    complexVisible = false;
+	    eraseComplex( );
+	} 
     });
     
     $('input.sample-tol').change(function(){
@@ -72,76 +96,3 @@ $('document').ready(function( ) {
     	$('.ui.scale.label').html($(this).val( ));
     });   
 });
-
-
-// Compute new shape
-function selectShape(name)	{
-    sample = [];
-    simplices = [];
-    
-    switch(name) {
-    case "circle":
-    	shape = circle([width/2,height/2], Math.min(width,height)/2-70);
-    	break;
-    case "lemniscate":
-    	shape = lemniscate([width/2,height/2],width/2-50);
-    	break;
-    case "lissajous":
-    	shape = lissajous([width/2,height/2], width/2-30, height/2-30);
-    }
-    drawShape( );
-}
-
-// Sample the shape
-function reSample(tol,size) {
-    simplices = [];
-    
-    if( shape.length==0 ) {
-	sample =  d3.range(size).map(function( ) {
-	    var x = d3.randomUniform(0,width)( );
-	    var y = d3.randomUniform(0,height)( );
-	    return [x,y];	
-	});
-    }
-    
-    else {
-	if(size > shape.length)
-	    return [];
-	else
-	    sample =  d3.range(size).map(function( ) {
-		var i = Math.floor(d3.randomUniform(shape.length)( ));
-		var r = d3.randomUniform(tol)( );
-		var s = d3.randomUniform(2*Math.PI)( );
-		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
-	    });
-	
-    }
-    // Update Hausdorff distance
-    $('.distance.label').html(H2(shape,sample));
-}
-
-
-// Computes Complexes
-var Complex = {
-    rips: function(scale) {
-	simplices[0]  = d3.range(sample.length);
-	simplices[1]  = [];
-	simplices[2]  = [];
-	
-	combinations(simplices[0],2).forEach(function(d) {
-    	    if ( diam2( d3.permute(sample,d) ) < scale )
-    		simplices[1].push(d);
-	});
-	
-	combinations(simplices[0],3).forEach(function(d) {
-    	    if ( diam2( d3.permute(sample,d) ) < scale )
-    		simplices[2].push(d);
-	});
-	drawComplex( );
-    },
-    cech: function(scale) {
-	console.log("I am not yet defined");
-    }   
-}
-
-

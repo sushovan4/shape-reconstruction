@@ -3,6 +3,81 @@
    ...
 */
 
+// Compute new shape
+function selectShape(name)	{
+    // Clean the current sample
+    eraseSample( );
+    
+    switch(name) {
+    case "circle":
+    	shape = circle([width/2,height/2], Math.min(width,height)/2-70);
+    	break;
+    case "lemniscate":
+    	shape = lemniscate([width/2,height/2],width/2-50);
+    	break;
+    case "lissajous":
+    	shape = lissajous([width/2,height/2], width/2-30, height/2-30);
+    }
+    // Draw the new shape
+    drawShape( );
+}
+
+// Sample the shape
+function reSample(tol,size) {
+    // Clean the current sample
+    eraseSample( );
+    
+    if( shape.length==0 ) {
+	sample =  d3.range(size).map(function( ) {
+	    var x = d3.randomUniform(0,width)( );
+	    var y = d3.randomUniform(0,height)( );
+	    return [x,y];	
+	});
+    }
+    
+    else {
+	if(size > shape.length)
+	    return [];
+	else
+	    sample =  d3.range(size).map(function( ) {
+		var i = Math.floor(d3.randomUniform(shape.length)( ));
+		var r = d3.randomUniform(tol)( );
+		var s = d3.randomUniform(2*Math.PI)( );
+		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
+	    });
+	
+    }
+    // Update Hausdorff distance
+    $('.distance.label').html(H2(shape,sample));
+    // Draw the new sample
+    drawSample( );
+}
+
+
+// Computes Complexes
+var Complex = {
+    rips: function(scale) {
+	simplices[0]  = d3.range(sample.length);
+	simplices[1]  = [];
+	simplices[2]  = [];
+	
+	combinations(simplices[0],2).forEach(function(d) {
+    	    if ( diam2( d3.permute(sample,d) ) < scale )
+    		simplices[1].push(d);
+	});
+	
+	combinations(simplices[0],3).forEach(function(d) {
+    	    if ( diam2( d3.permute(sample,d) ) < scale )
+    		simplices[2].push(d);
+	});
+	drawComplex( );
+	drawBalls(scale/2)
+    },
+    cech: function(scale) {
+	console.log("I am not yet defined");
+    }   
+}
+
 // Lissajous
 function lissajous(center,a=100,b=100,kx=3,ky=2,n=200) {
     var t = d3.range(n).map(function(d) {

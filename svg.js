@@ -3,10 +3,45 @@
    ...
 */
 
+// Draw shape
+function drawShape( ) {
+    if ( !shapeVisible )
+	return;
+    eraseShape( );
+    var line = d3.line( );
+    svg.append("path")
+	.attr("class", "shape")
+	.attr("d", line(shape));
+}
+
+// Erase Shape
+function eraseShape( ) {
+    $('svg .shape').remove( );   
+}
+
+
+// Draw sample
+function drawSample( ) {
+    svg.selectAll(".sample")
+    	.data(sample)
+    	.join("circle")
+    	.attr("class", "sample")
+    	.attr("cx", function(d) { return d[0] })
+    	.attr("cy", function(d) { return d[1] })    
+    	.attr("r", 3)
+}
+
+// Erase Sample
+function eraseSample( ) {
+    sample = [];
+    simplices = [];
+    $('svg .sample').remove( );       
+}
+
 // Draw Complex
 function drawComplex( ) {
-    $('svg .edge').remove( );
-    $('svg .triangle').remove( );
+    eraseComplex( );
+    
     svg.selectAll(".edge")
 	.data(simplices[1])
 	.enter( ).append("line")
@@ -24,6 +59,12 @@ function drawComplex( ) {
     });
 }
 
+// Erase Complex
+function eraseComplex( ) {
+    $('svg .edge').remove( );
+    $('svg .triangle').remove( );
+}
+
 // Draw Balls
 function drawBalls(radius) {
     if ( !ballsVisible )
@@ -39,25 +80,7 @@ function drawBalls(radius) {
 	.attr("r", radius);	
 }
 
-// Draw shape
-function drawShape( ) {
-    $('svg .shape').remove( );
-    if ( !shapeVisible )
-	return;
-    
-    var line = d3.line( );
-    svg.append("path")
-	.attr("class", "shape")
-	.attr("d", line(shape));
-}
+// Erase Balls
+function eraseBalls( ) {
 
-// Draw sample
-function drawSampe( ) {
-    svg.selectAll(".sample")
-    	.data(sample)
-    	.join("circle")
-    	.attr("class", "sample")
-    	.attr("cx", function(d) { return d[0] })
-    	.attr("cy", function(d) { return d[1] })    
-    	.attr("r", 3)
 }
