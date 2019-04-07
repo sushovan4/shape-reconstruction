@@ -71,10 +71,25 @@ var Complex = {
     		simplices[2].push(d);
 	});
 	drawComplex( );
-	drawBalls(scale/2)
+	drawBalls(scale/2.0);
     },
     cech: function(scale) {
-	console.log("I am not yet defined");
+	simplices[0]  = d3.range(sample.length);
+	simplices[1]  = [];
+	simplices[2]  = [];
+	
+	combinations(simplices[0],2).forEach(function(d) {
+    	    if ( diam2( d3.permute(sample,d) ) < 2*scale )
+    		simplices[1].push(d);
+	});
+	
+	combinations(simplices[0],3).forEach(function(d) {
+	    console.log(circRad2( d3.permute(sample,d) ));
+	    if ( circRad2( d3.permute(sample,d) ) < scale )
+    		simplices[2].push(d);
+	});
+	drawComplex( );
+	drawBalls(scale);
     }   
 }
 
@@ -133,6 +148,16 @@ function diam2(points) {
 	});
     });
     return diam;
+}
+
+// Compute Circumradius
+function circRad2(A) {
+    var cg = [0,0]; var n = A.length + 0.0;
+    A.forEach(function(a) {
+	cg[0] = cg[0] + a[0]/n;
+	cg[1] = cg[1] + a[1]/n;
+    });
+    return Math.max(dist2(cg, A[0]),dist2(cg, A[1]),dist2(cg, A[2]));
 }
 
 // Compute Hausdorff distance in 2D

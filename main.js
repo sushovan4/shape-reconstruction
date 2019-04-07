@@ -48,7 +48,7 @@ $('document').ready(function( ) {
     $('input.scale')
     	.change(function( ){
 	    // Compute and draw the simplicial complex
-    	    Complex[$('.complex.dropdown').dropdown('get value')](2*$(this).val( ));
+    	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
     	})
     ;
     
