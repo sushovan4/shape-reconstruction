@@ -5,10 +5,10 @@
 
 A JS demonstration of Euclidean shape reconstruction via Simplicial Complexes
 
-## Random Samples
+### Random Samples
 
-## Hausdorff Distance
+### Hausdorff Distance
 
-## Vietoris-Rips Complex
+### Vietoris-Rips Complex
 
-## Cech Complex
+### Cech Complex
