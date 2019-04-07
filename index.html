@@ -55,14 +55,14 @@
 	    
 	    <!-- Noise Selection -->
 	    <h5 class="ui inverted header">
-	      <input type="range" min="0" max="30" step="1" value="0" class="sample-tol">
-	      Noise <span class="ui tol label">0</span>
+	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise">
+	      Noise: <span class="ui large noise label">0</span>
 	    </h5>
 	    
 	    <!-- Sample Size Selection -->
 	    <h5 class="ui inverted header">
       	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size">
-	      Size: <div class="ui mini size label">10</div>
+	      Size: <div class="ui  large size label">10</div>
 	    </h5>
 	    
 	    <!-- Display Hausdorff distance -->
@@ -86,11 +86,11 @@
 		</div>
 	      </div>
 	    </div>
-	    <input type="range"  min="0" max="200" step="5" value="0" class="scale">
-	    <div style="text-align:center">
-	      Scale: <div class="ui mini scale label">0</div>
-	    </div>
-
+	    <h5 class="ui inverted header">
+	      <input type="range"  min="0" max="200" step="5" value="0" class="scale">
+	      Scale: <div class="ui large scale label">0</div>
+	    </h5>
+	    
 	    <div class="ui horizontal inverted divider">Settings</div>
 	    <div class="ui left aligned segment">
 	      <div class="ui toggle shape checkbox">

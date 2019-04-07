@@ -40,7 +40,7 @@ $('document').ready(function( ) {
     
     // Resample the shape
     $('.sample.button').click(function(){
-	reSample($('.sample-tol').val( ), $('.sample-size').val( ));
+	reSample($('.sample-noise').val( ), $('.sample-size').val( ));
     });
     
     
@@ -86,8 +86,8 @@ $('document').ready(function( ) {
 	} 
     });
     
-    $('input.sample-tol').change(function(){
-    	$('.ui.tol.label').html($(this).val( ));
+    $('input.sample-noise').change(function(){
+    	$('.ui.noise.label').html($(this).val( ));
     });
     $('input.sample-size').change(function(){
     	$('.ui.size.label').html($(this).val( ));
