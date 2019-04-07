@@ -6,9 +6,15 @@
 // Compute new shape
 function selectShape(name)	{
     // Clean the current sample
-    eraseSample( );
+    cleanSample( );
+    
+    eraseComplex( );
+    $('.distance.label').html("");
     
     switch(name) {
+    case "":
+	shape = [];
+	break;
     case "circle":
     	shape = circle([width/2,height/2], Math.min(width,height)/2-70);
     	break;
@@ -25,7 +31,7 @@ function selectShape(name)	{
 // Sample the shape
 function reSample(tol,size) {
     // Clean the current sample
-    eraseSample( );
+    cleanSample( );
     
     if( shape.length==0 ) {
 	sample =  d3.range(size).map(function( ) {
@@ -48,11 +54,10 @@ function reSample(tol,size) {
 	
     }
     // Update Hausdorff distance
-    $('.distance.label').html(H2(shape,sample));
+    drawH2( );
     // Draw the new sample
     drawSample( );
 }
-
 
 // Computes Complexes
 var Complex = {
@@ -162,30 +167,47 @@ function circRad2(A) {
 
 // Compute Hausdorff distance in 2D
 function H2(A,B) {
-    var d=0;
+    var d1=0, d2=0;
+    points = [];
     
     // Return if the sets are empty
     if(A.length==0 || B.length==0)
-    	return null;
+    	return [undefined,points];
     
     // Distance A to B
     A.forEach(function(a) {
    	var k=Infinity;
+	var nn;
 	B.forEach(function(b) {
-      	    k = Math.min(k, dist2(a,b));
+      	   // k = Math.min(k, dist2(a,b));
+	    if( dist2(a,b) < k ) {
+		k = dist2(a,b);
+		nn = b;
+	    }
 	});
-    	d = Math.max(d,k); 
+	if( k >= d1 ) {
+	    d1 = k;
+	    points[0] = [a,nn];
+	}
     });
     
     // Distance B to A
     B.forEach(function(b) {
    	var k=Infinity;
+	var nn;	
 	A.forEach(function(a) {
-      	    k = Math.min(k, dist2(a,b));
+      	    // k = Math.min(k, dist2(a,b));
+	    if( dist2(a,b) < k ) {
+		k = dist2(a,b);
+		nn = a;
+	    }
 	});
-    	d = Math.max(d,k); 
+	if( k >= d2 ) {
+	    d2 = k;
+	    points[1] = [b,nn];
+	}
     });
-    return d; 
+    return [Math.max(d1,d2),points];
 }
 
 // Compute all combinations of k elements from a set

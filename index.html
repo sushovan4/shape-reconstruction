@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <link rel="icon" href="favicon.png" type="image/x-icon" />
   <meta charset="utf-8"> <!-- Unicode suppport -->
   <!-- Normalize device width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,38 +35,43 @@
 <body>
   <div class="ui inverted basic padded segment" style="margin-top:0;min-height:100vh">
     <div class="ui fluid container">
+      <h1 class="ui dividing inverted header">
+	<img src="icon.png" class="ui mini image">
+	<i style="color:#21ba45">visual</i>Topology /
+      	<a href="https://github.com/sushovan4/visual-topology">
+	  <i class="inverted green github icon"></i>
+	</a>
+      </h1>
       <div class="ui stackable divided grid">
 	<div class="row">
 	  <div class="six wide center aligned column">
-	    <h1 class="ui dividing inverted header">
-	      <i style="color:#21ba45">visual</i>Topology
-	    </h1>
-            <div class="ui inverted header">Sample 
+            <div class="ui inverted header">Let $S$ be a sample from $X=$
               <!-- Shape Selection -->
               <div class="ui shape inline dropdown">
 		<div class="text" style="color: #21ba45"></div>
 		<i class="dropdown icon"></i>
 		<div class="menu">
 		  <div class="item" data-value="">$\mathbb{R}^2$</div>
-		  <div class="item" data-value="circle">a Circle</div>
-		  <div class="item" data-value="lissajous">a Lissajous</div>
-		  <div class="item" data-value="lemniscate">a Lemniscate</div>
+		  <div class="item" data-value="circle">Circle</div>
+		  <div class="item" data-value="lissajous">Lissajous</div>
+		  <div class="item" data-value="lemniscate">Lemniscate</div>
 		</div>
+		 with
 	      </div>
 	    </div>
-	    
-	    <!-- Noise Selection -->
-	    <h5 class="ui inverted header">
-	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise slider">
-	      Noise: <span class="ui large noise label">0</span>
-	    </h5>
-	    
+	    	    
 	    <!-- Sample Size Selection -->
 	    <h5 class="ui inverted header">
       	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size slider">
 	      Size: <div class="ui  large size label">10</div>
 	    </h5>
-	    
+
+	    <!-- Noise Selection -->
+	    <h5 class="ui inverted header">
+	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise slider">
+	      Noise: <span class="ui large noise label">0</span>
+	    </h5>
+
 	    <!-- Display Hausdorff distance -->
 	    <h5 class="ui inverted header">
 	      $d_H(X,S)$=<span class="ui large distance label">_</span>
@@ -107,6 +113,11 @@
 	      <div class="ui toggle complex checkbox">
 		<input type="checkbox" checked="checked">
 		<label>Display Complex</label>
+	      </div>
+	      <br><br>
+	      <div class="ui toggle H2 checkbox">
+		<input type="checkbox">
+		<label>Haudorff Hint</label>
 	      </div>
 	      <br><br>
 	      <a onclick="saveSVG(this)" href="" class="ui green button">Save SVG</a>

@@ -3,6 +3,39 @@
    ...
 */
 
+function drawH2( ){
+    var val = H2(shape,sample);
+    var points = val[1];
+    $('.distance.label').html(val[0]);
+
+    if( !H2Visible )
+	return;
+	
+    eraseH2( );
+    if( points.length == 0 )
+	return;
+
+    svg.append("line")
+	.attr("class", "Hausdorff0")
+	.attr("x1", points[0][0][0])
+	.attr("y1", points[0][0][1])
+    	.attr("x2", points[0][1][0])
+	.attr("y2", points[0][1][1])
+    ;
+    svg.append("line")
+	.attr("class", "Hausdorff1")
+	.attr("x1", points[1][0][0])
+	.attr("y1", points[1][0][1])
+    	.attr("x2", points[1][1][0])
+	.attr("y2", points[1][1][1])
+    ;
+}
+
+function eraseH2( ){
+    $('svg .Hausdorff0').remove( );
+    $('svg .Hausdorff1').remove( );
+}
+
 // Draw shape
 function drawShape( ) {
     if ( !shapeVisible )
@@ -32,10 +65,12 @@ function drawSample( ) {
 }
 
 // Erase Sample
-function eraseSample( ) {
+function cleanSample( ) {
     sample = [];
     simplices = [];
-    $('svg .sample').remove( );       
+    $('svg .sample').remove( );
+    eraseComplex( );
+    eraseBalls( );
 }
 
 // Draw Complex

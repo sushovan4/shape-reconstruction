@@ -2,6 +2,9 @@ html, body {
     font-size: 16px;
 }
 
+.ui.dropdown {
+    z-index: 1111;
+}
 .drawing.segment {
     min-height: 300px;
     height: 90vh;
@@ -30,6 +33,19 @@ html, body {
     fill: none;
     stroke: #D2691E;
     stroke-width: 2;
+}
+
+.Hausdorff0 {
+    stroke: #D2691E;
+    opacity: 0.4;
+    stroke-width: 6;
+    fill: none;
+}
+.Hausdorff1 {
+    opacity: 0.4;
+    stroke: black;
+    stroke-width: 6;
+    fill: none;
 }
 
 /* Slider style */

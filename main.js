@@ -13,6 +13,7 @@ $('document').ready(function( ) {
     shapeVisible =   true;
     ballsVisible =   true;
     complexVisible = true;
+    H2Visible      = false;
     
     // Create main svg element
     svg = d3.select(".drawing.segment").append("svg")
@@ -32,8 +33,7 @@ $('document').ready(function( ) {
     $('.ui.shape.dropdown')
     	.dropdown({
     	    onChange: function(value){
-    		if(value != "")
-		    selectShape(value);
+		selectShape(value);
     	    }
     	})
     ;
@@ -85,7 +85,18 @@ $('document').ready(function( ) {
 	    eraseComplex( );
 	} 
     });
-    
+
+    $('.H2.checkbox').checkbox({
+	onChecked:   function( ) {
+	    H2Visible = true;
+	    drawH2( );
+	},
+	onUnchecked: function( ) {
+	    H2Visible = false;
+	    eraseH2( );
+	} 
+    });
+
     $('input.sample-noise').change(function(){
     	$('.ui.noise.label').html($(this).val( ));
     });
