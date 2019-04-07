@@ -24,7 +24,6 @@
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
   </script>
   <!-- My Styles -->
-  <link rel="stylesheet" type="text/css" href="range.css"> 
   <link rel="stylesheet" type="text/css" href="style.css"> 
   <!-- Call local js files -->
   <script src="main.js"></script>
@@ -38,11 +37,13 @@
       <div class="ui stackable divided grid">
 	<div class="row">
 	  <div class="six wide center aligned column">
-	    <h1 class="ui dividing inverted header">Topological Shape Reconstruction</h1>
+	    <h1 class="ui dividing inverted header">
+	      <i style="color:#21ba45">visual</i>Topology
+	    </h1>
             <div class="ui inverted header">Sample 
               <!-- Shape Selection -->
               <div class="ui shape inline dropdown">
-		<div class="text" style="color: pink"></div>
+		<div class="text" style="color: #21ba45"></div>
 		<i class="dropdown icon"></i>
 		<div class="menu">
 		  <div class="item" data-value="">$\mathbb{R}^2$</div>
@@ -55,13 +56,13 @@
 	    
 	    <!-- Noise Selection -->
 	    <h5 class="ui inverted header">
-	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise">
+	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise slider">
 	      Noise: <span class="ui large noise label">0</span>
 	    </h5>
 	    
 	    <!-- Sample Size Selection -->
 	    <h5 class="ui inverted header">
-      	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size">
+      	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size slider">
 	      Size: <div class="ui  large size label">10</div>
 	    </h5>
 	    
@@ -78,7 +79,7 @@
 	      Build
 	      <!-- Complex Selection -->
 	      <div class="ui complex inline dropdown">
-		<div class="text" style="color: pink"></div>
+		<div class="text" style="color: #21ba45"></div>
 		<i class="dropdown icon"></i>
 		<div class="menu">
 		  <div class="active item" data-value="rips">Rips Complex</div>
@@ -87,7 +88,7 @@
 	      </div>
 	    </div>
 	    <h5 class="ui inverted header">
-	      <input type="range"  min="0" max="200" step="5" value="0" class="scale">
+	      <input type="range"  min="0" max="300" step="5" value="0" class="scale slider">
 	      Scale: <div class="ui large scale label">0</div>
 	    </h5>
 	    
@@ -107,6 +108,8 @@
 		<input type="checkbox" checked="checked">
 		<label>Display Complex</label>
 	      </div>
+	      <br><br>
+	      <a onclick="saveSVG(this)" href="" class="ui green button">Save SVG</a>
 	    </div>
      	  </div>
 	  

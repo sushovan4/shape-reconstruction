@@ -214,3 +214,10 @@ function combinations(set, k) {
     }
     return combs
 }
+
+// Save SVG
+function saveSVG(e) {
+    var blob = new Blob([$('.drawing.segment svg').prop('outerHTML')], {type: 'image/svg'})
+    e.href = URL.createObjectURL(blob);
+    e.download = 'drawing.svg';
+}
