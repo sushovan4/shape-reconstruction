@@ -3,33 +3,23 @@
    ...
 */
 
+// On DOM ready
 $('document').ready(function( ) {
-    // Globals
-    shape = [];
-    sample = [];
-    simplices = [];
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
-    shapeVisible =   true;
-    ballsVisible =   true;
-    complexVisible = true;
-    H2Visible      = false;
     
     // Create main svg element
     svg = d3.select(".drawing.segment").append("svg")
     	.attr("width", width+"px")
     	.attr("height", height+"px");
     
-    // Initialize dropdown as needed by Semantic-UI
+    // Initialize dropdowns and their callbacks as needed by Semantic-UI
     $('.ui.dropdown')
     	.dropdown()
     ;
-
     $('.ui.complex.dropdown')
     	.dropdown('set selected', 'rips');
     ;
-    
-    // Callback when a new shape is chosen
     $('.ui.shape.dropdown')
     	.dropdown({
     	    onChange: function(value){
@@ -38,21 +28,18 @@ $('document').ready(function( ) {
     	})
     ;
     
-    // Resample the shape
-    $('.sample.button').click(function(){
-	reSample($('.sample-noise').val( ), $('.sample-size').val( ));
-    });
-    
-    
-    // Callback when scale is changed
+    // Other DOM events and callbacks
+    $('.sample.button')
+	.click(function(){
+	    // Resample the shape
+	    reSample($('.sample-noise').val( ), $('.sample-size').val( ));
+	})
+    ;
     $('input.scale')
     	.change(function( ){
-	    // Compute and draw the simplicial complex
     	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
     	})
     ;
-    
-    // Other DOM events and callbacks
     $('.shape.checkbox').checkbox({
 	onChecked:   function( ) {
 	    shapeVisible = true;
@@ -62,8 +49,7 @@ $('document').ready(function( ) {
 	    shapeVisible = false;
 	    eraseShape( );
 	} 
-    });
-    
+    });    
     $('.balls.checkbox').checkbox({
 	onChecked:   function( ){
 	    ballsVisible = true;
@@ -74,7 +60,6 @@ $('document').ready(function( ) {
 	    eraseBalls( );
 	} 
     });
-    
     $('.complex.checkbox').checkbox({
 	onChecked:   function( ) {
 	    complexVisible = true;
@@ -85,7 +70,6 @@ $('document').ready(function( ) {
 	    eraseComplex( );
 	} 
     });
-
     $('.H2.checkbox').checkbox({
 	onChecked:   function( ) {
 	    H2Visible = true;
@@ -96,7 +80,6 @@ $('document').ready(function( ) {
 	    eraseH2( );
 	} 
     });
-
     $('input.sample-noise').change(function(){
     	$('.ui.noise.label').html($(this).val( ));
     });

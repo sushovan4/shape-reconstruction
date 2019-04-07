@@ -55,6 +55,10 @@ function eraseShape( ) {
 
 // Draw sample
 function drawSample( ) {
+    // Set the scale back to 0
+    $('input.scale').val(0);
+    $('input.scale').trigger("change");
+    
     svg.selectAll(".sample")
     	.data(sample)
     	.join("circle")
@@ -64,7 +68,7 @@ function drawSample( ) {
     	.attr("r", 3)
 }
 
-// Erase Sample
+// Clean Sample
 function cleanSample( ) {
     sample = [];
     simplices = [];

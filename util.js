@@ -3,6 +3,16 @@
    ...
 */
 
+
+// Globals
+shape = [];
+sample = [];
+simplices = [];
+shapeVisible =   true;
+ballsVisible =   true;
+complexVisible = true;
+H2Visible      = false;
+
 // Compute new shape
 function selectShape(name)	{
     // Clean the current sample
