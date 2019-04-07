@@ -89,7 +89,6 @@ var Complex = {
 	});
 	
 	combinations(simplices[0],3).forEach(function(d) {
-	    console.log(circRad2( d3.permute(sample,d) ));
 	    if ( circRad2( d3.permute(sample,d) ) < scale )
     		simplices[2].push(d);
 	});
@@ -179,7 +178,6 @@ function H2(A,B) {
    	var k=Infinity;
 	var nn;
 	B.forEach(function(b) {
-      	   // k = Math.min(k, dist2(a,b));
 	    if( dist2(a,b) < k ) {
 		k = dist2(a,b);
 		nn = b;
@@ -196,8 +194,7 @@ function H2(A,B) {
    	var k=Infinity;
 	var nn;	
 	A.forEach(function(a) {
-      	    // k = Math.min(k, dist2(a,b));
-	    if( dist2(a,b) < k ) {
+    	    if( dist2(a,b) < k ) {
 		k = dist2(a,b);
 		nn = a;
 	    }
