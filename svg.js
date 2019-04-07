@@ -70,7 +70,7 @@ function drawBalls(radius) {
     if ( !ballsVisible )
 	return;
     
-    $('svg .ball').remove( );
+    eraseBalls( );
     svg.selectAll(".ball")
 	.data(sample)
 	.enter( ).append("circle")
@@ -82,5 +82,5 @@ function drawBalls(radius) {
 
 // Erase Balls
 function eraseBalls( ) {
-
+    $('svg .ball').remove( );
 }

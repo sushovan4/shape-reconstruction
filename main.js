@@ -67,7 +67,7 @@ $('document').ready(function( ) {
     $('.balls.checkbox').checkbox({
 	onChecked:   function( ){
 	    ballsVisible = true;
-	    drawBalls( );
+	    drawBalls($('input.scale').val( ));
 	},
 	onUnchecked: function( ){
 	    ballsVisible = false;
