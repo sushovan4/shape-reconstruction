@@ -102,8 +102,8 @@ var Complex = {
 	    if ( circRad2( d3.permute(sample,d) ) < scale )
     		simplices[2].push(d);
 	});
-	drawComplex( );
 	drawBalls(scale);
+	drawComplex( );
     }   
 }
 

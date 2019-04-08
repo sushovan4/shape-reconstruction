@@ -6,7 +6,7 @@ html, body {
     z-index: 1111;
 }
 .drawing.segment {
-    min-height: 300px;
+    min-height: 700px;
     height: 90vh;
 }
 .sample {
@@ -26,7 +26,7 @@ html, body {
 }
 .triangle {
     stroke: none;
-    opacity: 0.3;
+    opacity: 0.8;
     fill: #6189DB;
 }
 .shape {

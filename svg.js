@@ -15,7 +15,7 @@ function drawH2( ){
     if( points.length == 0 )
 	return;
 
-    svg.append("line")
+    svg.prepend("line")
 	.attr("class", "Hausdorff0")
 	.attr("x1", points[0][0][0])
 	.attr("y1", points[0][0][1])
@@ -75,6 +75,7 @@ function cleanSample( ) {
     $('svg .sample').remove( );
     eraseComplex( );
     eraseBalls( );
+    eraseH2( );
 }
 
 // Draw Complex

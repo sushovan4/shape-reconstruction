@@ -53,7 +53,7 @@ $('document').ready(function( ) {
     $('.balls.checkbox').checkbox({
 	onChecked:   function( ){
 	    ballsVisible = true;
-	    drawBalls($('input.scale').val( ));
+	    drawBalls($('input.scale').val( )/2);
 	},
 	onUnchecked: function( ){
 	    ballsVisible = false;
