@@ -4,22 +4,22 @@
 */
 
 // Shape params
-var shapeStrokeColor = '#D35400';
+var shapeStrokeColor = '#3498DB';
 var shapeStrokeWidth = '1.3';
 
 // Sample params
 var sampleFillColor = '#566573';
 var sampleOpacity = '0.8';
-var sampleRadius = '5';
+var sampleRadius = '3';
 
 // Edge params
-var edgeStrokeColor = '#1946A1';
+var edgeStrokeColor = '#E74C3C';
 var edgeStrokeWidth = '2';
-var edgeOpacity = '1';
+var edgeOpacity = '0.8';
 
 // Triangle params
-var triangleFillColor = '#1946A1';
-var triangleOpacity = '1';
+var triangleFillColor = '#E74C3C';
+var triangleOpacity = '0.6';
 
 // Ball params
 var ballFillColor = '#5ddd7b';
