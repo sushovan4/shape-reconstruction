@@ -26,7 +26,7 @@ function selectShape(name)	{
 	shape = [];
 	break;
     case "circle":
-    	shape = circle([width/2,height/2], Math.min(width,height)/2-70);
+    	shape = circle([width/2,height/2], Math.min(width,height)/4-70);
     	break;
     case "lemniscate":
     	shape = lemniscate([width/2,height/2],width/2-50);
