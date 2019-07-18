@@ -3,6 +3,26 @@
    ...
 */
 
+// Shape params
+var shapeStrokeColor = 'black';
+var shapeStrokeWidth = '2';
+
+// Sample params
+var sampleFillColor = 'orange';
+var sampleOpacity = '0.6';
+var sampleRadius = '5';
+
+// Edge params
+var edgeStrokeColor = '#1946A1';
+var edgeStrokeWidth = '2';
+var edgeOpacity = '1';
+
+// Triangle params
+var triangleFillColor = '#1946A1';
+var triangleOpacity = '1';
+
+
+
 function drawH2( ){
     var val = H2(shape,sample);
     var points = val[1];
@@ -45,8 +65,8 @@ function drawShape( ) {
     svg.append("path")
 	.attr("class", "shape")
 	.attr("fill", "none")
-	.attr("stroke","orange")
-	.attr("stroke-width","1")
+	.attr("stroke", shapeStrokeColor)
+	.attr("stroke-width", shapeStrokeWidth)
 	.attr("d", line(shape));
 }
 
@@ -67,10 +87,11 @@ function drawSample( ) {
     	.join("circle")
 	.attr("class", "sample")
     	.attr("stroke", "none")
-    	.attr("fill", "black")
+    	.attr("fill", sampleFillColor)
+	.attr("opacity", sampleOpacity)
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
-    	.attr("r", 3)
+    	.attr("r", sampleRadius);
 }
 
 // Clean Sample
@@ -92,8 +113,9 @@ function drawComplex( ) {
 	.enter( ).append("line")
 	.attr("class","edge")
 	.attr("fill", "none")
-	.attr("stroke", "#1946A1")
-	.attr("stroke-width", "2")
+	.attr("stroke", edgeStrokeColor)
+	.attr("stroke-width", edgeStrokeWidth)
+	.attr("opacity", edgeOpacity)
 	.attr("x1", function(d) { return sample[d[0]][0] })
 	.attr("y1", function(d) { return sample[d[0]][1] })
     	.attr("x2", function(d) { return sample[d[1]][0] })
@@ -102,9 +124,10 @@ function drawComplex( ) {
     simplices[2].forEach(function(t) {
     var line = d3.line( );
 	svg.append("path")
+	    .attr("class", "triangle")
 	    .attr("stroke", "none")
-	    .attr("opacity", "0.8")
-	    .attr("fill", "#6189DB")
+	    .attr("opacity", triangleOpacity)
+	    .attr("fill", triangleFillColor)
 	    .attr("d", line(d3.permute(sample, t)));
     });
 }

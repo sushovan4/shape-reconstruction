@@ -5,6 +5,7 @@
 
 // On DOM ready
 $('document').ready(function( ) {
+
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
     
