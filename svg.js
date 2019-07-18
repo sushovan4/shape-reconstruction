@@ -4,12 +4,12 @@
 */
 
 // Shape params
-var shapeStrokeColor = 'black';
-var shapeStrokeWidth = '2';
+var shapeStrokeColor = '#D35400';
+var shapeStrokeWidth = '1.3';
 
 // Sample params
-var sampleFillColor = 'orange';
-var sampleOpacity = '0.6';
+var sampleFillColor = '#566573';
+var sampleOpacity = '0.8';
 var sampleRadius = '5';
 
 // Edge params
@@ -21,7 +21,11 @@ var edgeOpacity = '1';
 var triangleFillColor = '#1946A1';
 var triangleOpacity = '1';
 
-
+// Ball params
+var ballFillColor = '#5ddd7b';
+var ballOpacity = 0.2;
+var ballStrokeColor = '#21ba45';
+var ballStrokeWidth = 2;
 
 function drawH2( ){
     var val = H2(shape,sample);
@@ -148,10 +152,10 @@ function drawBalls(radius) {
 	.data(sample)
 	.enter( ).append("circle")
 	.attr("class", "ball")
-	.attr("opacity","0.2")
-	.attr("fill","#5ddd7b")
-	.attr("stroke","#21ba45")
-	.attr("stroke-width","2")
+	.attr("opacity", ballOpacity)
+	.attr("fill", ballFillColor)
+	.attr("stroke", ballStrokeColor)
+	.attr("stroke-width", ballStrokeWidth)
     	.attr("cx", function(d) { return d[0] })
 	.attr("cy", function(d) { return d[1] })    
 	.attr("r", radius);	
