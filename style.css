@@ -9,31 +9,6 @@ html, body {
     min-height: 700px;
     height: 90vh;
 }
-.sample {
-    fill: #ggg;
-    stroke: none;
-}
-.ball {
-    opacity: 0.2;
-    fill: #5ddd7b;
-    stroke: #21ba45;
-    stroke-width: 2;
-}
-.edge {
-    fill: none;
-    stroke: #1946A1;
-    stroke-width: 2;
-}
-.triangle {
-    stroke: none;
-    opacity: 0.8;
-    fill: #6189DB;
-}
-.shape {
-    fill: none;
-    stroke: #D2691E;
-    stroke-width: 2;
-}
 
 .Hausdorff0 {
     stroke: #D2691E;

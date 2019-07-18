@@ -44,6 +44,9 @@ function drawShape( ) {
     var line = d3.line( );
     svg.append("path")
 	.attr("class", "shape")
+	.attr("fill", "none")
+	.attr("stroke","orange")
+	.attr("stroke-width","1")
 	.attr("d", line(shape));
 }
 
@@ -62,7 +65,9 @@ function drawSample( ) {
     svg.selectAll(".sample")
     	.data(sample)
     	.join("circle")
-    	.attr("class", "sample")
+	.attr("class", "sample")
+    	.attr("stroke", "none")
+    	.attr("fill", "black")
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
     	.attr("r", 3)
@@ -85,7 +90,10 @@ function drawComplex( ) {
     svg.selectAll(".edge")
 	.data(simplices[1])
 	.enter( ).append("line")
-	.attr("class", "edge")
+	.attr("class","edge")
+	.attr("fill", "none")
+	.attr("stroke", "#1946A1")
+	.attr("stroke-width", "2")
 	.attr("x1", function(d) { return sample[d[0]][0] })
 	.attr("y1", function(d) { return sample[d[0]][1] })
     	.attr("x2", function(d) { return sample[d[1]][0] })
@@ -94,7 +102,9 @@ function drawComplex( ) {
     simplices[2].forEach(function(t) {
     var line = d3.line( );
 	svg.append("path")
-	    .attr("class", "triangle")
+	    .attr("stroke", "none")
+	    .attr("opacity", "0.8")
+	    .attr("fill", "#6189DB")
 	    .attr("d", line(d3.permute(sample, t)));
     });
 }
@@ -115,7 +125,11 @@ function drawBalls(radius) {
 	.data(sample)
 	.enter( ).append("circle")
 	.attr("class", "ball")
-	.attr("cx", function(d) { return d[0] })
+	.attr("opacity","0.2")
+	.attr("fill","#5ddd7b")
+	.attr("stroke","#21ba45")
+	.attr("stroke-width","2")
+    	.attr("cx", function(d) { return d[0] })
 	.attr("cy", function(d) { return d[1] })    
 	.attr("r", radius);	
 }
