@@ -5,7 +5,24 @@
 
 // On DOM ready
 $('document').ready(function( ) {
-
+    // $('#import')
+    // 	.click(function() {
+    // 	    var files = $('#selectFiles')[0].files;
+    // 	    if (files.length <= 0) {
+    // 		return false;
+    // 	    }
+	    
+    // 	    var reader = new FileReader();
+	    
+    // 	    reader.onload = function(e) { 
+    // 		var result = JSON.parse(e.target.result);
+    // 		var formatted = JSON.stringify(result, null, 2);
+    // 	    }
+	    
+    // 	    reader.readAsText(files.item(0));
+    // 	})
+    // ;
+    
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
     
@@ -36,9 +53,17 @@ $('document').ready(function( ) {
 	    reSample($('.sample-noise').val( ), $('.sample-size').val( ));
 	})
     ;
-    $('input.scale')
+    $('input.rips.scale')
     	.change(function( ){
     	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
+    	    $('.ui.rips.scale.label').html($(this).val( ));
+    	})
+    ;
+     $('input.shadow.scale')
+    	.change(function( ){
+	    Complex['shadow']($(this).val( ));
+	    //Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
+    	    $('.ui.shadow.scale.label').html($(this).val( ));
     	})
     ;
     $('.shape.checkbox').checkbox({
@@ -87,7 +112,4 @@ $('document').ready(function( ) {
     $('input.sample-size').change(function(){
     	$('.ui.size.label').html($(this).val( ));
     });
-    $('input.scale').change(function(){
-    	$('.ui.scale.label').html($(this).val( ));
-    });   
 });

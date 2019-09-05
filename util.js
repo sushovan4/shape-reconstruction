@@ -104,7 +104,27 @@ var Complex = {
 	});
 	drawBalls(scale);
 	drawComplex( );
-    }   
+    },
+    shadow: function(scale) {
+	alert( 'shadow draw' );
+	compute_d_eps( );
+	// simplices[0]  = d3.range(sample.length);
+	// simplices[1]  = [];
+	// simplices[2]  = [];
+	
+	// combinations(simplices[0],2).forEach(function(d) {
+    	//     if ( diam2( d3.permute(sample,d) ) < scale )
+    	// 	simplices[1].push(d);
+	// });
+	
+	// combinations(simplices[0],3).forEach(function(d) {
+    	//     if ( diam2( d3.permute(sample,d) ) < scale )
+    	// 	simplices[2].push(d);
+	// });
+	//drawComplex( );
+	// drawBalls(scale/2.0);
+    },
+    
 }
 
 // Lissajous

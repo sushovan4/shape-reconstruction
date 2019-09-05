@@ -142,6 +142,26 @@ function eraseComplex( ) {
     $('svg .triangle').remove( );
 }
 
+// Draw Shadow
+function drawComplex( ) {
+    eraseShadow( );
+    
+    simplices[2].forEach(function(t) {
+    var line = d3.line( );
+	svg.append("path")
+	    .attr("class", "triangle")
+	    .attr("stroke", "none")
+	    .attr("opacity", triangleOpacity)
+	    .attr("fill", triangleFillColor)
+	    .attr("d", line(d3.permute(sample, t)));
+    });
+}
+
+// Erase Complex
+function eraseShadow( ) {
+    $('svg .triangle').remove( );
+}
+
 // Draw Balls
 function drawBalls(radius) {
     if ( !ballsVisible )
