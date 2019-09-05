@@ -5,6 +5,7 @@
 
 
 // Globals
+shapeSegments = [];
 shape = [];
 sample = [];
 simplices = [];
@@ -16,9 +17,10 @@ H2Visible      = false;
 // Compute new shape
 function selectShape(name)	{
     // Clean the current sample
-    cleanSample( );
-    
-    eraseComplex( );
+    //cleanSample( );
+    // Erase drawn complexes
+    //eraseComplex( );
+    // Erase Hausdorff distances
     $('.distance.label').html("");
     
     switch(name) {
@@ -26,22 +28,24 @@ function selectShape(name)	{
 	shape = [];
 	break;
     case "circle":
-    	shape = circle([width/2,height/2], Math.min(width,height)/4-70);
-    	break;
+    	shape = circle(center, Math.min(...center)/2);
+	break;
     case "lemniscate":
-    	shape = lemniscate([width/2,height/2],width/2-50);
+    	shape = lemniscate(center, center[0]-50);
     	break;
     case "lissajous":
-    	shape = lissajous([width/2,height/2], width/2-30, height/2-30);
+    	shape = lissajous(center, center[0]-100, center[1]-100);
     }
     // Draw the new shape
+    shapeSegments=[shape];
     drawShape( );
+    $('.sample.button').trigger("click");
 }
 
 // Sample the shape
 function reSample(tol,size) {
     // Clean the current sample
-    cleanSample( );
+    //cleanSample( );
     
     if( shape.length==0 ) {
 	sample =  d3.range(size).map(function( ) {
@@ -52,16 +56,15 @@ function reSample(tol,size) {
     }
     
     else {
-	if(size > shape.length)
-	    return [];
-	else
-	    sample =  d3.range(size).map(function( ) {
-		var i = Math.floor(d3.randomUniform(shape.length)( ));
-		var r = d3.randomUniform(tol)( );
-		var s = d3.randomUniform(2*Math.PI)( );
-		return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
-	    });
-	
+	sample =  d3.range(size).map(function(i) {
+	    var index = Math.floor(i*(shape.length-1)/size);
+	    
+	    //var i = Math.floor(d3.randomUniform(shape.length)( ));
+	    var r = d3.randomUniform(tol)( );
+	    var s = d3.randomUniform(2*Math.PI)( );
+	    //return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
+	    return [shape[index][0] + r*Math.cos(s), shape[index][1] + r*Math.sin(s)];
+	});
     }
     // Update Hausdorff distance
     drawH2( );
@@ -106,8 +109,8 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
-	alert( 'shadow draw' );
-	compute_d_eps( );
+	//	alert( 'shadow draw' );
+	//compute_d_eps( );
 	// simplices[0]  = d3.range(sample.length);
 	// simplices[1]  = [];
 	// simplices[2]  = [];
@@ -128,7 +131,7 @@ var Complex = {
 }
 
 // Lissajous
-function lissajous(center,a=100,b=100,kx=3,ky=2,n=200) {
+function lissajous(center,a=100,b=100,kx=3,ky=2,n=1000) {
     var t = d3.range(n).map(function(d) {
   	return 2*Math.PI*d/(n-1);
     });
@@ -154,7 +157,7 @@ function lemniscate(center,a,n=100) {
 }
 
 // Circle
-function circle(center, radius, range=[0,1], n=200) {
+function circle(center, radius, range=[0,1], n=100) {
     var t = d3.range(n).map(function(d) {
   	return range[0] + (range[1]-range[0])*d/(n-1);
     }); 
@@ -266,7 +269,17 @@ function combinations(set, k) {
 
 // Save SVG
 function saveSVG(e) {
-    var blob = new Blob([$('.drawing.segment svg').prop('outerHTML')], {type: 'image/svg'})
+    var blob = new Blob([$('.drawing.segment svg').prop('outerHTML')],
+			{type: 'image/svg'})
     e.href = URL.createObjectURL(blob);
     e.download = 'drawing.svg';
 }
+
+
+// var q=[],visited=[];
+// function BFS(node,scale) {
+    
+//     var queue = [];
+//     var labeled = new Set( );
+
+// }

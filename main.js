@@ -25,6 +25,8 @@ $('document').ready(function( ) {
     
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
+
+    center = [width/2,height/2];
     
     // Create main svg element
     svg = d3.select(".drawing.segment").append("svg")

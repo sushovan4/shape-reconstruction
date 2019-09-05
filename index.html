@@ -41,72 +41,76 @@
       	<a href="https://github.com/sushovan4/visual-topology">
 	  <i class="inverted green github icon"></i>
 	</a>
+	<div class="ui sub header">v2</div>
       </h1>
       <div class="ui stackable divided grid">
 	<div class="row">
 	  <div class="twelve wide column">
 	    <div class="ui drawing segment"></div>
 	  </div>
-
+	  
 	  <div class="four wide center aligned column">
-            <div class="ui inverted header">Let $S$ be a sample from $X=$
-              <!-- Shape Selection -->
-              <div class="ui shape inline dropdown">
-		<div class="text" style="color: #21ba45"></div>
-		<i class="dropdown icon"></i>
-		<div class="menu">
-		  <div class="item" data-value="">$\mathbb{R}^2$</div>
-		  <div class="item" data-value="circle">Circle</div>
-		  <div class="item" data-value="lissajous">Lissajous</div>
-		  <div class="item" data-value="lemniscate">Lemniscate</div>
-		</div>
-		 with
+            <!-- Shape Selection -->
+            <div class="ui horizontal divider">
+	      <div class="ui green circular label">1</div>
+	    </div>
+	    Shape =
+            <div class="ui shape inline dropdown">
+	      <div class="text" style="color: #21ba45"></div>
+	      <i class="dropdown icon"></i>
+	      <div class="menu">
+		<div class="item" data-value="">$\mathbb{R}^2$</div>
+		<div class="item" data-value="circle">Circle</div>
+		<div class="item" data-value="lissajous">Lissajous</div>
+		<div class="item" data-value="lemniscate">Lemniscate</div>
 	      </div>
 	    </div>
-
 	    
-	    <!-- <input type="file" id="selectFiles" value="Import" /> -->
-	    <!-- <br><br> -->
-	    <!-- <button id="import" class="ui red button">Import</button> -->
-  	    	    
-	    <!-- Sample Size Selection -->
+	    <!-- Sample Selection -->
+	    <div class="ui horizontal divider">
+	      <div class="ui green circular label">2</div>
+	    </div>
 	    <h5 class="ui inverted header">
-      	      <input type="range" min="0" max="100" step="1" value="10" class="sample-size slider">
-	      Size: <div class="ui  large size label">10</div>
+      	      <input type="range" min="0" max="500" step="1" value="10"
+		     class="sample-size slider">
+	      Sample Size = <div class="ui size label">10</div>
 	    </h5>
-
+	    
 	    <!-- Noise Selection -->
 	    <h5 class="ui inverted header">
-	      <input type="range" min="0" max="100" step="5" value="0" class="sample-noise slider">
-	      Noise: <span class="ui large noise label">0</span>
+	      <input type="range" min="0" max="200" step="5" value="0"
+		     class="sample-noise slider">
+	      Noise = <span class="ui noise label">0</span>
 	    </h5>
-
+	    
 	    <!-- Display Hausdorff distance -->
 	    <h5 class="ui inverted header">
-	      $d_H(X,S)$=<span class="ui large distance label">_</span>
+	      $d_H(X,S)$=<span class="ui distance label">_</span>
 	    </h5>
 	    
 	    <button class="ui green sample button">
 	      Sample
 	    </button>
 	    
-	    <div class="ui horizontal inverted divider">
-	      Build
-	      <!-- Complex Selection -->
-	      <div class="ui complex inline dropdown">
+	    <!-- Complex Selection -->
+	    <div class="ui horizontal divider">
+	      <div class="ui green circular label">3</div>
+	    </div>
+	    Build
+	    <div class="ui complex inline dropdown">
 		<div class="text" style="color: #21ba45"></div>
 		<i class="dropdown icon"></i>
 		<div class="menu">
 		  <div class="active item" data-value="rips">Rips Complex</div>
 		  <div class="item" data-value="cech">Čech Complex</div>
 		</div>
-	      </div>
 	    </div>
+	  
 	    <h5 class="ui inverted header">
 	      <input type="range"  min="0" max="300" step="5" value="0" class="rips scale slider">
 	      Scale: <div class="ui large rips scale label">0</div>
 	    </h5>
-
+	    
 	    <div class="ui horizontal inverted divider">
 	      Build Shadow
 	    </div>
@@ -114,7 +118,7 @@
 	      <input type="range"  min="0" max="300" step="5" value="0" class="shadow scale slider">
 	      Scale: <div class="ui large shadow scale label">0</div>
 	    </h5>
-
+	    
 	    <div class="ui horizontal inverted divider">Settings</div>
 	    <div class="ui left aligned segment">
 	      <div class="ui toggle shape checkbox">
@@ -138,7 +142,7 @@
 	      </div>
 	      <br><br>
 	    </div>
-
+	    
 	    <a onclick="saveSVG(this)" href="" class="ui green button">Save SVG</a>
      	  </div>
 	</div>
@@ -149,58 +153,59 @@
     <a href="www.smajhi.com" style="border-bottom: 3px solid white;color: white">
       Sushovan Majhi
     </a>
-
-    <!-- <div class="ui segment"> -->
-    <!--   <form class="ui svg form"> -->
-    <!-- 	<div class="two fields"> -->
-    <!-- 	  <label>Shape</label> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input id="shape_stroke_color" value="rgb(1,0,0)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="shape_stroke_width" value="2"> -->
-    <!-- 	  </div> -->
-    <!-- 	</div> -->
-
-    <!-- 	<div class="two fields"> -->
-    <!-- 	  <label>Complex Edge</label> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="edge[stroke-rgba]" value="rgba(0,0,0,1)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="edge[stroke-width]" value="2"> -->
-    <!-- 	  </div> -->
-    <!-- 	</div> -->
-
-    <!-- 	<div class="three fields"> -->
-    <!-- 	  <label>Complex Triangle</label> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="triangle[stroke-rgba]" value="rgba(0,0,0,1)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="triangle[fill-rgba]" value="rgba(0,0,0,1)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="triangle[stroke-width]" value="2"> -->
-    <!-- 	  </div> -->
-    <!-- 	</div> -->
-
-    <!-- 	<div class="three fields"> -->
-    <!-- 	  <label>Ball</label> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="ball[stroke-rgba]" value="rgba(0,0,0,1)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="ball[fill-rgba]" value="rgba(0,0,0,1)"> -->
-    <!-- 	  </div> -->
-    <!-- 	  <div class="field"> -->
-    <!-- 	    <input name="ball[stroke-width]" value="2"> -->
-    <!-- 	  </div> -->
-    <!-- 	</div> -->
-	
-    <!--   </form> -->
-    <!-- </div> -->
-    
   </div>
 </body>
 </html>
+
+  
+  <!-- <div class="ui segment"> -->
+  <!--   <form class="ui svg form"> -->
+  <!-- 	<div class="two fields"> -->
+  <!-- 	  <label>Shape</label> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input id="shape_stroke_color" value="rgb(1,0,0)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="shape_stroke_width" value="2"> -->
+  <!-- 	  </div> -->
+  <!-- 	</div> -->
+  
+  <!-- 	<div class="two fields"> -->
+  <!-- 	  <label>Complex Edge</label> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="edge[stroke-rgba]" value="rgba(0,0,0,1)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="edge[stroke-width]" value="2"> -->
+  <!-- 	  </div> -->
+  <!-- 	</div> -->
+  
+  <!-- 	<div class="three fields"> -->
+  <!-- 	  <label>Complex Triangle</label> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="triangle[stroke-rgba]" value="rgba(0,0,0,1)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="triangle[fill-rgba]" value="rgba(0,0,0,1)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="triangle[stroke-width]" value="2"> -->
+  <!-- 	  </div> -->
+  <!-- 	</div> -->
+  
+  <!-- 	<div class="three fields"> -->
+  <!-- 	  <label>Ball</label> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="ball[stroke-rgba]" value="rgba(0,0,0,1)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="ball[fill-rgba]" value="rgba(0,0,0,1)"> -->
+  <!-- 	  </div> -->
+  <!-- 	  <div class="field"> -->
+  <!-- 	    <input name="ball[stroke-width]" value="2"> -->
+  <!-- 	  </div> -->
+  <!-- 	</div> -->
+  
+  <!--   </form> -->
+  <!-- </div> -->
+  

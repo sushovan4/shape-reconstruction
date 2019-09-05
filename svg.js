@@ -60,35 +60,29 @@ function eraseH2( ){
     $('svg .Hausdorff1').remove( );
 }
 
-// Draw shape
-function drawShape( ) {
-    if ( !shapeVisible )
-	return;
-    eraseShape( );
+function drawSegment(segment) {
     var line = d3.line( );
     svg.append("path")
 	.attr("class", "shape")
 	.attr("fill", "none")
 	.attr("stroke", shapeStrokeColor)
 	.attr("stroke-width", shapeStrokeWidth)
-	.attr("d", line(shape));
+	.attr("d", line(segment));
 }
 
-// Erase Shape
-function eraseShape( ) {
+// Draw shape
+function drawShape( ) {
+    if ( !shapeVisible )
+	return;
     $('svg .shape').remove( );   
+    shapeSegments.forEach(function(segment){drawSegment(segment)});
 }
-
 
 // Draw sample
 function drawSample( ) {
-    // Set the scale back to 0
-    $('input.scale').val(0);
-    $('input.scale').trigger("change");
-    
     svg.selectAll(".sample")
     	.data(sample)
-    	.join("circle")
+    	.join(enter=> enter.append("circle")).transition( ).duration(500)
 	.attr("class", "sample")
     	.attr("stroke", "none")
     	.attr("fill", sampleFillColor)
@@ -96,25 +90,24 @@ function drawSample( ) {
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
     	.attr("r", sampleRadius);
+    $('input.scale').trigger("change");
 }
 
-// Clean Sample
-function cleanSample( ) {
-    sample = [];
-    simplices = [];
-    $('svg .sample').remove( );
-    eraseComplex( );
-    eraseBalls( );
-    eraseH2( );
-}
+// // Clean Sample
+// function cleanSample( ) {
+//     sample = [];
+//     simplices = [];
+//     $('svg .sample').remove( );
+//     eraseComplex( );
+//     eraseBalls( );
+//     eraseH2( );
+// }
 
 // Draw Complex
-function drawComplex( ) {
-    eraseComplex( );
-    
+function drawComplex( ) {  
     svg.selectAll(".edge")
 	.data(simplices[1])
-	.enter( ).append("line")
+	.join(enter=> enter.append("line"))
 	.attr("class","edge")
 	.attr("fill", "none")
 	.attr("stroke", edgeStrokeColor)
@@ -125,8 +118,9 @@ function drawComplex( ) {
     	.attr("x2", function(d) { return sample[d[1]][0] })
 	.attr("y2", function(d) { return sample[d[1]][1] })
 
+    $('svg .triangle').remove( );    
     simplices[2].forEach(function(t) {
-    var line = d3.line( );
+	var line = d3.line( );
 	svg.append("path")
 	    .attr("class", "triangle")
 	    .attr("stroke", "none")
@@ -136,14 +130,8 @@ function drawComplex( ) {
     });
 }
 
-// Erase Complex
-function eraseComplex( ) {
-    $('svg .edge').remove( );
-    $('svg .triangle').remove( );
-}
-
 // Draw Shadow
-function drawComplex( ) {
+function drawShadow( ) {
     eraseShadow( );
     
     simplices[2].forEach(function(t) {
