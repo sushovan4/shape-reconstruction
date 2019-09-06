@@ -7,6 +7,7 @@
 // Globals
 shapeSegments = [];
 shape = [];
+adjRips=[];
 sample = [];
 simplices=[[],[],[]];
 shapeVisible =   true;
@@ -67,8 +68,8 @@ function reSample(tol,size) {
 var Complex = {
     rips: function(scale) {
 	simplices=[d3.range(sample.length),[],[]];
-	
 	adjRips = new Array(sample.length);
+	
 	if(scale<=0)
 	    return;
 	
@@ -109,12 +110,8 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
+	// shadow=[];
 	//	alert( 'shadow draw' );
-	//compute_d_eps( );
-	// simplices[0]  = d3.range(sample.length);
-	// simplices[1]  = [];
-	// simplices[2]  = [];
-	
 	// combinations(simplices[0],2).forEach(function(d) {
     	//     if ( diam2( d3.permute(sample,d) ) < scale )
     	// 	simplices[1].push(d);
