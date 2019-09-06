@@ -7,13 +7,16 @@
 // Globals
 shapeSegments = [];
 shape = [];
-adjRips=[];
+adjRips = [];
 sample = [];
-simplices=[[],[],[]];
+simplices = [[],[],[]];
+dEps = [];
+shadow=[];
 shapeVisible =   true;
 ballsVisible =   true;
 complexVisible = true;
 H2Visible      = false;
+
 
 // Compute new shape
 function selectShape(name)	{
@@ -69,21 +72,27 @@ var Complex = {
     rips: function(scale) {
 	simplices=[d3.range(sample.length),[],[]];
 	adjRips = new Array(sample.length);
+	dEps = new Array(sample.length);
 	
 	if(scale<=0)
 	    return;
 	
-	for(i = 0; i < adjRips.length; i++) {
+	for(var i = 0; i < adjRips.length; i++) {
 	    adjRips[i]= new Array(sample.length);
 	    
-	    for(j = 0; j < adjRips.length; j++) {
+	    for(var j = 0; j < adjRips.length; j++) {
 		var d = dist2(sample[i],sample[j]); 
 		if( d < scale) {
 		    adjRips[i][j]=d;
 		    if(i<j)
     	 		simplices[1].push([i,j]);
 		}
+		else
+		    adjRips[i][j]=0;
 	    }
+	}
+	for(var i = 0; i < adjRips.length; i++ ){
+	    dEps[i] = dijsktra(adjRips, i);
 	}
 	combinations(simplices[0],3).forEach(function(d) {
     	    if ( diam2( d3.permute(sample,d) ) < scale )
@@ -106,30 +115,51 @@ var Complex = {
 	    if ( circRad2( d3.permute(sample,d) ) < scale )
     		simplices[2].push(d);
 	});
+	
 	drawBalls(scale);
 	drawComplex( );
     },
     shadow: function(scale) {
-	// shadow=[];
-	//	alert( 'shadow draw' );
-	// combinations(simplices[0],2).forEach(function(d) {
-    	//     if ( diam2( d3.permute(sample,d) ) < scale )
-    	// 	simplices[1].push(d);
-	// });
-	
-	// combinations(simplices[0],3).forEach(function(d) {
-    	//     if ( diam2( d3.permute(sample,d) ) < scale )
-    	// 	simplices[2].push(d);
-	// });
-	//drawComplex( );
-	// drawBalls(scale/2.0);
+	shadow=[];
+	combinations(simplices[0],3).forEach(function(d) {
+	    if ( dEps[d[0]][d[1]] < scale && dEps[d[1]][d[2]] < scale &&
+	       dEps[d[0]][d[2]] < scale)
+    		shadow.push(d);
+	});
+	drawShadow( );
     },
     
 }
 
+// Dijsktra
+function dijsktra(adj, src) {
+    var dist= new Array(adj.length);
+    var sptSet = new Array(adj.length);
+
+    for(var i = 0; i < adj.length; i++ ) 
+	dist[i] = Infinity; sptSet[i] = false;
+
+    dist[src] = 0;
+    
+    for(var count = 0; count < adj.length - 1; count++ ) {
+	var min = Infinity, min_index; 
+	for(v = 0; v < adj.length; v++) 
+            if (!sptSet[v] && dist[v] <= min) 
+		min = dist[v], min_index = v; 
+	sptSet[min_index] = true;
+	
+	for(var v = 0; v < adj.length; v++)
+	    if(!sptSet[v] && adj[min_index][v] && dist[min_index] != Infinity 
+               && dist[min_index] + adj[min_index][v] < dist[v])
+		dist[v] = dist[min_index] + adj[min_index][v]; 
+	
+    }
+    return dist;
+}
+
 var Shape = {
     // Lissajous
-    lissajous: function(center,a=100,b=100,kx=3,ky=2,n=500) {
+    lissajous: function(center,a=200,b=300,kx=3,ky=2,n=500) {
 	var t = d3.range(n).map(function(d) {
   	    return 2*Math.PI*d/(n-1);
 	});
@@ -170,14 +200,14 @@ var Shape = {
     }
 }
 
-// Compute distance of two points in 2D 
+// Compute Euclidean distance of two points in 2D 
 function dist2(a,b){
     if( a.length != b.length || a.length != 2 )
 	return null;
     return Math.sqrt( Math.pow(a[0]-b[0],2) + Math.pow(a[1]-b[1],2) );
 }
 
-// Compute diameter of points in 2D
+// Compute dist2 diameter of points in 2D
 function diam2(points) {
     var diam = 0;
     points.forEach(function(p) {

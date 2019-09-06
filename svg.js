@@ -26,7 +26,7 @@ var ballFillColor = '#5ddd7b';
 var ballOpacity = 0.2;
 var ballStrokeColor = '#21ba45';
 var ballStrokeWidth = 2;
-var shadowOpacity=1.0;
+var shadowOpacity= 0.8;
 var shadowFillColor = 'blue';
 
 function drawH2( ){
@@ -92,7 +92,7 @@ function drawSample( ) {
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
     	.attr("r", sampleRadius);
-    $('input.scale').trigger("change");
+    //$('input.scale').trigger("change");
 }
 
 // // Clean Sample
