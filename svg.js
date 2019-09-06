@@ -76,7 +76,6 @@ function drawSegment(segment) {
 function drawShape( ) {
     if ( !shapeVisible )
 	return;
-    $('svg .shape').remove( );   
     shapeSegments.forEach(function(segment){drawSegment(segment)});
 }
 
@@ -92,18 +91,7 @@ function drawSample( ) {
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
     	.attr("r", sampleRadius);
-    //$('input.scale').trigger("change");
 }
-
-// // Clean Sample
-// function cleanSample( ) {
-//     sample = [];
-//     simplices = [];
-//     $('svg .sample').remove( );
-//     eraseComplex( );
-//     eraseBalls( );
-//     eraseH2( );
-// }
 
 // Draw Complex
 function drawComplex( ) {

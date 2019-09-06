@@ -19,9 +19,7 @@ H2Visible      = false;
 
 
 // Compute new shape
-function selectShape(name)	{
-    // Clean the current sample
-    //cleanSample( );
+function selectShape(name) {
     // Erase drawn complexes
     //eraseComplex( );
     // Erase Hausdorff distances
@@ -65,6 +63,7 @@ function reSample(tol,size) {
     drawH2( );
     // Draw the new sample
     drawSample( );
+    $('input.rips.scale').trigger("change");
 }
 
 // Computes Complexes
