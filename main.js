@@ -59,8 +59,6 @@ $('document').ready(function( ) {
     	.change(function( ){
     	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
     	    $('.ui.rips.scale.label').html($(this).val( ));
-	    $('input.shadow.scale').val($(this).val( ));
-    	    //$('.ui.shadow.scale.label').html($(this).val( ));
     	})
     ;
      $('input.shadow.scale')

@@ -36,8 +36,9 @@ function selectShape(name) {
 
 // Sample the shape
 function reSample(tol,size) {
-    // Clean the current sample
-    //cleanSample( );
+    if(size==0){
+	return;
+    }
     
     if( shape.length==0 ) {
 	sample =  d3.range(size).map(function( ) {
@@ -50,16 +51,13 @@ function reSample(tol,size) {
     else {
 	sample =  d3.range(size).map(function(i) {
 	    var index = Math.floor(i*(shape.length-1)/size);
-	    
-	    //var i = Math.floor(d3.randomUniform(shape.length)( ));
 	    var r = d3.randomUniform(tol)( );
 	    var s = d3.randomUniform(2*Math.PI)( );
-	    //return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
 	    return [shape[index][0] + r*Math.cos(s), shape[index][1] +
 		    r*Math.sin(s)];
 	});
     }
-    // Update Hausdorff distance
+    // Update the Hausdorff distance
     drawH2( );
     // Draw the new sample
     drawSample( );
@@ -158,7 +156,8 @@ function dijsktra(adj, src) {
 
 var Shape = {
     // Lissajous
-    lissajous: function(center,a=200,b=300,kx=3,ky=2,n=500) {
+    lissajous: function(center,a=center[0]-100,b=center[1]-100,
+			kx=3,ky=2,n=500) {
 	var t = d3.range(n).map(function(d) {
   	    return 2*Math.PI*d/(n-1);
 	});

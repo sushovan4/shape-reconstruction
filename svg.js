@@ -32,7 +32,7 @@ var shadowFillColor = 'blue';
 function drawH2( ){
     var val = H2(shape,sample);
     var points = val[1];
-    $('.distance.label').html(val[0]);
+    $('.distance.label').html(Math.floor(val[0]));
 
     if( !H2Visible )
 	return;
@@ -63,6 +63,7 @@ function eraseH2( ){
 }
 
 function drawSegment(segment) {
+  
     var line = d3.line( );
     svg.append("path")
 	.attr("class", "shape")
@@ -76,6 +77,7 @@ function drawSegment(segment) {
 function drawShape( ) {
     if ( !shapeVisible )
 	return;
+    $('.drawing .shape').remove( );
     shapeSegments.forEach(function(segment){drawSegment(segment)});
 }
 
