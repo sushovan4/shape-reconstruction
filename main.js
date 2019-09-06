@@ -32,6 +32,8 @@ $('document').ready(function( ) {
     svg = d3.select(".drawing.segment").append("svg")
     	.attr("width", width+"px")
     	.attr("height", height+"px");
+
+    $('.ui.sidebar').sidebar('attach events',  $('.toggle.item'));
     
     // Initialize dropdowns and their callbacks as needed by Semantic-UI
     $('.ui.dropdown')

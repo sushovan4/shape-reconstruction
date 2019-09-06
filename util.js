@@ -62,17 +62,20 @@ function reSample(tol,size) {
     // Draw the new sample
     drawSample( );
     $('input.rips.scale').trigger("change");
+    $('input.shadow.scale').val(0);
+    $('input.shadow.scale').trigger("change");
 }
 
 // Computes Complexes
 var Complex = {
     rips: function(scale) {
+	if(scale==0 || sample.length==0) {
+	    return;
+	}
+	
 	simplices=[d3.range(sample.length),[],[]];
 	adjRips = new Array(sample.length);
 	dEps = new Array(sample.length);
-	
-	if(scale<=0)
-	    return;
 	
 	for(var i = 0; i < adjRips.length; i++) {
 	    adjRips[i]= new Array(sample.length);
@@ -117,6 +120,10 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
+	if(scale==0 || sample.length==0) {
+	    return;
+	}
+	   
 	shadow=[];
 	combinations(simplices[0],3).forEach(function(d) {
 	    if ( dEps[d[0]][d[1]] < scale && dEps[d[1]][d[2]] < scale &&
@@ -170,7 +177,7 @@ var Shape = {
     },
     
     // Lemniscate 
-    lemniscate: function(center,a,n=500) {
+    lemniscate: function(center,a=center[0]-100,n=500) {
 	var t = d3.range(n).map(function(d) {
   	    return 2*Math.PI*d/(n-1);
 	});

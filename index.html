@@ -33,6 +33,37 @@
 </head>
 
 <body>
+
+  <div class="ui right sidebar  vertical menu">
+    <div class="header item">Settings</div>
+    <div class="item">
+      <div class="ui toggle shape checkbox">
+	<input type="checkbox" checked="checked">
+	<label>Display Shape</label>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui toggle balls checkbox">
+	<input type="checkbox" checked="checked">
+	<label>Display Balls</label>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui toggle complex checkbox">
+	<input type="checkbox" checked="checked">
+	<label>Display Complex</label>
+      </div>
+    </div>
+    
+    <div class="item">
+      <div class="ui toggle H2 checkbox">
+	<input type="checkbox">
+	<label>Hausdorff Hint</label>
+      </div>
+    </div>
+  </div>
   <div class="ui fixed menu" style="margin:0;border-radius:0">
     <div class="header item">
       <img src="img/icon.png" class="ui mini image">
@@ -41,121 +72,97 @@
     
     <div class="right menu">
       <a class="item" href="https://github.com/sushovan4/visual-topology">
-      <i class="large github icon"></i>      
+	<i class="large github icon"></i>      
     </a>
-    <a class="item">
-      <i class="bars icon"></i>
-    </a>
+      <a class="toggle item">
+	<i class="bars icon"></i>
+      </a>
     </div>
   </div>
   
-  <div class="ui inverted basic segment fluid container" style="padding-top:60px;min-height:100vh">
-    <div class="ui stackable grid">
-      <div class="twelve wide column">
-	<div class="ui drawing segment"></div>
-      </div>
-      
-      <div class="four wide center aligned column">
-        <!-- Shape Selection -->
-        <div class="ui horizontal inverted divider">
-	  1. Select Shape $X$
+  <div class="pusher"  style="padding-top:60px;min-height:100vh">
+    <div class="ui inverted basic segment fluid container">
+      <div class="ui stackable grid">
+	<div class="twelve wide column">
+	  <div class="ui drawing segment"></div>
 	</div>
-        <div class="ui shape selection dropdown">
-	  <div class="text" style="color: #21ba45"></div>
-	  <i class="dropdown icon"></i>
-	  <div class="menu">
-	    <div class="item" data-value="">$\mathbb{R}^2$</div>
-	    <div class="item" data-value="circle">Circle</div>
-	    <div class="item" data-value="lissajous">Lissajous</div>
-	    <div class="item" data-value="lemniscate">Lemniscate</div>
+	
+	<div class="four wide center aligned column">
+          <!-- Shape Selection -->
+          <div class="ui horizontal inverted divider">
+	    1. Select Shape $X$
 	  </div>
-	</div>
-	    
-	<!-- Sample Selection -->
-	<div class="ui horizontal inverted divider">
-	  2. Select Sample $S$
-	</div>
-	<h5 class="ui inverted header">
+          <div class="ui shape selection dropdown">
+	    <div class="text" style="color: #21ba45"></div>
+	    <i class="dropdown icon"></i>
+	    <div class="menu">
+	      <div class="item" data-value="">$\mathbb{R}^2$</div>
+	      <div class="item" data-value="circle">Circle</div>
+	      <div class="item" data-value="lissajous">Lissajous</div>
+	      <div class="item" data-value="lemniscate">Lemniscate</div>
+	    </div>
+	  </div>
+	  
+	  <!-- Sample Selection -->
+	  <div class="ui horizontal inverted divider">
+	    2. Select Sample $S$
+	  </div>
+	  <h5 class="ui inverted header">
       	  <input type="range" min="0" max="500" step="1" value="0"
 		 class="sample-size slider">
 	  Size = <div class="ui size label">0</div>
-	</h5>
-	
-	<!-- Noise Selection -->
-	<h5 class="ui inverted header">
-	  <input type="range" min="0" max="200" step="5" value="0"
-		 class="sample-noise slider">
-	  Noise = <span class="ui noise label">0</span>
-	</h5>
-	
-	<!-- Display Hausdorff distance -->
-	<h5 class="ui inverted header">
-	  $d_H(X,S)=$<span class="ui distance label">_</span>
-	</h5>
-	    
-	<button class="ui green sample button">
-	  Sample
-	</button>
-	    
-	<!-- Complex Selection -->
-	<div class="ui horizontal inverted divider">
-	  3. Build Complex on $S$
-	</div>
-	<div class="ui complex selection dropdown">
-	  <div class="text" style="color: #21ba45"></div>
-	  <i class="dropdown icon"></i>
-	  <div class="menu">
-	    <div class="active item" data-value="rips">Rips Complex</div>
-	    <div class="item" data-value="cech">Čech Complex</div>
-	  </div>
-	</div>
+	  </h5>
 	  
-	<h5 class="ui inverted header">
-	  <input type="range"  min="0" max="300" step="5" value="0" class="rips scale slider">
-	  Scale: <div class="ui large rips scale label">0</div>
-	</h5>
-	
-	<div class="ui horizontal inverted divider">
-	  4. Build Shadow
+	  <!-- Noise Selection -->
+	  <h5 class="ui inverted header">
+	    <input type="range" min="0" max="200" step="5" value="0"
+		   class="sample-noise slider">
+	    Noise = <span class="ui noise label">0</span>
+	  </h5>
+	  
+	  <!-- Display Hausdorff distance -->
+	  <h5 class="ui inverted header">
+	  $d_H(X,S)=$<span class="ui distance label">_</span>
+	  </h5>
+	  
+	  <button class="ui green sample button">
+	    Sample
+	  </button>
+	  
+	  <!-- Complex Selection -->
+	  <div class="ui horizontal inverted divider">
+	    3. Build Complex on $(S,||\cdot||)$
+	  </div>
+	  <div class="ui complex selection dropdown">
+	    <div class="text" style="color: #21ba45"></div>
+	    <i class="dropdown icon"></i>
+	    <div class="menu">
+	      <div class="active item" data-value="rips">Rips Complex</div>
+	      <div class="item" data-value="cech">Čech Complex</div>
 	    </div>
-	<h5 class="ui inverted header">
-	  <input type="range"  min="0" max="300" step="5" value="0" class="shadow scale slider">
-	  Scale: <div class="ui large shadow scale label">0</div>
-	</h5>	    
-	<a onclick="saveSVG(this)" href="" class="ui green button">Save SVG</a>
-	<br><br>
-	<i class="large copyright icon"></i>
-	2019
-	<a href="www.smajhi.com" style="border-bottom: 3px solid white;color: white">
-	  Sushovan Majhi
-	</a>
+	  </div>
+	  
+	  <h5 class="ui inverted header">
+	    <input type="range"  min="0" max="300" step="5" value="0" class="rips scale slider">
+	    Scale $(\epsilon)$: <div class="ui large rips scale label">0</div>
+	  </h5>
+	  
+	  <div class="ui horizontal inverted divider">
+	    4. Build Rips on $(S,d_\epsilon)$ 
+	  </div>
+	  <h5 class="ui inverted header">
+	    <input type="range"  min="0" max="300" step="5" value="0" class="shadow scale slider">
+	    Scale: <div class="ui large shadow scale label">0</div>
+	  </h5>	    
+	  <a onclick="saveSVG(this)" href="" class="ui green button">Save SVG</a>
+	  <br><br>
+	  <i class="large copyright icon"></i>
+	  2019
+	  <a href="www.smajhi.com" style="border-bottom: 3px solid white;color: white">
+	    Sushovan Majhi
+	  </a>
+	</div>
       </div>
-    </div>
-  </div>
-
-  <div class="ui sidebar">
-    <div class="ui horizontal inverted divider">Settings</div>
-    <div class="ui left aligned segment">
-      <div class="ui toggle shape checkbox">
-	<input type="checkbox" checked="checked">
-	<label>Display Shape</label>
-      </div>
-      <br><br>
-      <div class="ui toggle balls checkbox">
-	<input type="checkbox" checked="checked">
-	<label>Display Balls</label>
-      </div>
-      <br><br>
-      <div class="ui toggle complex checkbox">
-	<input type="checkbox" checked="checked">
-	<label>Display Complex</label>
-      </div>
-      <br><br>
-      <div class="ui toggle H2 checkbox">
-	<input type="checkbox">
-	<label>Hausdorff Hint</label>
-      </div>
-      <br><br>
     </div>
   </div>
 </body>
