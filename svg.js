@@ -97,6 +97,8 @@ function drawSample( ) {
 
 // Draw Complex
 function drawComplex( ) {
+    if ( !complexVisible )
+	return;
     
     svg.selectAll(".edge")
 	.data(simplices[1])
@@ -124,6 +126,9 @@ function drawComplex( ) {
 
 // Draw Shadow
 function drawShadow( ) {
+    if ( !shadowVisible )
+	return;
+    
     var line = d3.line( );
     svg.selectAll(".shadow")
 	.data(shadow)

@@ -12,9 +12,10 @@ sample = [];
 simplices = [[],[],[]];
 dEps = [];
 shadow=[];
-shapeVisible =   true;
-ballsVisible =   true;
+shapeVisible   = true;
+ballsVisible   = true;
 complexVisible = true;
+shadowVisible  = true;
 H2Visible      = false;
 
 

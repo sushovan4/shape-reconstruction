@@ -77,17 +77,17 @@ $('document').ready(function( ) {
 	},
 	onUnchecked: function( ) {
 	    shapeVisible = false;
-	    eraseShape( );
+	    $('.drawing .shape').remove( );
 	} 
     });    
     $('.balls.checkbox').checkbox({
 	onChecked:   function( ){
 	    ballsVisible = true;
-	    drawBalls($('input.scale').val( )/2);
+	    drawBalls($('input.rips.scale').val( )/2);
 	},
 	onUnchecked: function( ){
 	    ballsVisible = false;
-	    eraseBalls( );
+	    $('.drawing .ball').remove( );
 	} 
     });
     $('.complex.checkbox').checkbox({
@@ -97,9 +97,21 @@ $('document').ready(function( ) {
 	},
 	onUnchecked: function( ) {
 	    complexVisible = false;
-	    eraseComplex( );
+	    $('.drawing .edge').remove( );
+	    $('.drawing .triangle').remove( );	   
 	} 
     });
+    $('.shadow.checkbox').checkbox({
+	onChecked:   function( ) {
+	    shadowVisible = true;
+	    drawShadow( );
+	},
+	onUnchecked: function( ) {
+	    shadowVisible = false;
+	    $('.drawing .shadow').remove( );
+	} 
+    });
+    
     $('.H2.checkbox').checkbox({
 	onChecked:   function( ) {
 	    H2Visible = true;
