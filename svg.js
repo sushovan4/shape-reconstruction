@@ -14,7 +14,7 @@ var sampleRadius = '3';
 
 // Edge params
 var edgeStrokeColor = '#E74C3C';
-var edgeStrokeWidth = '2';
+var edgeStrokeWidth = 1.3;
 var edgeOpacity = '0.8';
 
 // Triangle params
@@ -26,8 +26,11 @@ var ballFillColor = '#5ddd7b';
 var ballOpacity = 0.2;
 var ballStrokeColor = '#21ba45';
 var ballStrokeWidth = 2;
+
 var shadowOpacity= 0.8;
 var shadowFillColor = 'blue';
+var shadowStrokeColor = 'blue';
+var shadowStrokeWidth = 3;
 
 function drawH2( ){
     var val = H2(shape,sample);
@@ -129,11 +132,24 @@ function drawShadow( ) {
     if ( !shadowVisible )
 	return;
     
+    svg.selectAll(".shadow-edge")
+	.data(shadow[1])
+	.join(enter=>enter.append("line")).transition( )
+    	.attr("class", "shadow-edge")
+    	.attr("stroke", shadowStrokeColor)
+    	.attr("opacity", shadowOpacity)
+	.attr("stroke-width", shadowStrokeWidth)
+    	.attr("fill", "none")
+	.attr("x1", function(d) { return sample[d[0]][0] })
+	.attr("y1", function(d) { return sample[d[0]][1] })
+    	.attr("x2", function(d) { return sample[d[1]][0] })
+	.attr("y2", function(d) { return sample[d[1]][1] });
+    
     var line = d3.line( );
-    svg.selectAll(".shadow")
-	.data(shadow)
+    svg.selectAll(".shadow-triangle")
+	.data(shadow[2])
 	.join(enter=>enter.append("path")).transition( )
-    	.attr("class", "shadow")
+    	.attr("class", "shadow-triangle")
     	.attr("stroke", "none")
     	.attr("opacity", shadowOpacity)
     	.attr("fill", shadowFillColor)

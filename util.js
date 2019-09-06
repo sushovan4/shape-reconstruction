@@ -121,15 +121,19 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
-	if(scale==0 || sample.length==0) {
+	if(scale==0 || sample.length==0 || dEps.length==0) {
 	    return;
 	}
-	   
-	shadow=[];
-	combinations(simplices[0],3).forEach(function(d) {
+	
+	shadow=[d3.range(sample.length),[],[]];
+	combinations(shadow[0],2).forEach(function(d) {
+	    if ( dEps[d[0]][d[1]] < scale)
+    		shadow[1].push(d);
+	});
+	combinations(shadow[0],3).forEach(function(d) {
 	    if ( dEps[d[0]][d[1]] < scale && dEps[d[1]][d[2]] < scale &&
 	       dEps[d[0]][d[2]] < scale)
-    		shadow.push(d);
+    		shadow[2].push(d);
 	});
 	drawShadow( );
     },

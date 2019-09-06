@@ -108,7 +108,8 @@ $('document').ready(function( ) {
 	},
 	onUnchecked: function( ) {
 	    shadowVisible = false;
-	    $('.drawing .shadow').remove( );
+	    $('.drawing .shadow-edge').remove( );
+	    $('.drawing .shadow-triangle').remove( );
 	} 
     });
     
