@@ -26,6 +26,8 @@ var ballFillColor = '#5ddd7b';
 var ballOpacity = 0.2;
 var ballStrokeColor = '#21ba45';
 var ballStrokeWidth = 2;
+var shadowOpacity=1.0;
+var shadowFillColor = 'blue';
 
 function drawH2( ){
     var val = H2(shape,sample);
@@ -104,10 +106,11 @@ function drawSample( ) {
 // }
 
 // Draw Complex
-function drawComplex( ) {  
+function drawComplex( ) {
+    
     svg.selectAll(".edge")
 	.data(simplices[1])
-	.join(enter=> enter.append("line"))
+	.join(enter=> enter.append("line")).transition( )
 	.attr("class","edge")
 	.attr("fill", "none")
 	.attr("stroke", edgeStrokeColor)
@@ -116,49 +119,40 @@ function drawComplex( ) {
 	.attr("x1", function(d) { return sample[d[0]][0] })
 	.attr("y1", function(d) { return sample[d[0]][1] })
     	.attr("x2", function(d) { return sample[d[1]][0] })
-	.attr("y2", function(d) { return sample[d[1]][1] })
-
-    $('svg .triangle').remove( );    
-    simplices[2].forEach(function(t) {
-	var line = d3.line( );
-	svg.append("path")
-	    .attr("class", "triangle")
-	    .attr("stroke", "none")
-	    .attr("opacity", triangleOpacity)
-	    .attr("fill", triangleFillColor)
-	    .attr("d", line(d3.permute(sample, t)));
-    });
+	.attr("y2", function(d) { return sample[d[1]][1] });
+    
+    var line = d3.line( );
+    svg.selectAll(".triangle")
+	.data(simplices[2])
+	.join(enter=>enter.append("path")).transition( )
+    	.attr("class", "triangle")
+    	.attr("stroke", "none")
+    	.attr("opacity", triangleOpacity)
+    	.attr("fill", triangleFillColor)
+    	.attr("d", function(d) {return line(d3.permute(sample,d))});
 }
 
 // Draw Shadow
 function drawShadow( ) {
-    eraseShadow( );
-    
-    simplices[2].forEach(function(t) {
     var line = d3.line( );
-	svg.append("path")
-	    .attr("class", "triangle")
-	    .attr("stroke", "none")
-	    .attr("opacity", triangleOpacity)
-	    .attr("fill", triangleFillColor)
-	    .attr("d", line(d3.permute(sample, t)));
-    });
-}
-
-// Erase Complex
-function eraseShadow( ) {
-    $('svg .triangle').remove( );
+    svg.selectAll(".shadow")
+	.data(shadow)
+	.join(enter=>enter.append("path")).transition( )
+    	.attr("class", "shadow")
+    	.attr("stroke", "none")
+    	.attr("opacity", shadowOpacity)
+    	.attr("fill", shadowFillColor)
+    	.attr("d", function(d) {return line(d3.permute(sample,d))});
 }
 
 // Draw Balls
 function drawBalls(radius) {
     if ( !ballsVisible )
 	return;
-    
-    eraseBalls( );
+
     svg.selectAll(".ball")
 	.data(sample)
-	.enter( ).append("circle")
+	.join(enter=>enter.append("circle")).transition( ) 
 	.attr("class", "ball")
 	.attr("opacity", ballOpacity)
 	.attr("fill", ballFillColor)
@@ -167,9 +161,4 @@ function drawBalls(radius) {
     	.attr("cx", function(d) { return d[0] })
 	.attr("cy", function(d) { return d[1] })    
 	.attr("r", radius);	
-}
-
-// Erase Balls
-function eraseBalls( ) {
-    $('svg .ball').remove( );
 }

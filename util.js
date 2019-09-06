@@ -8,7 +8,7 @@
 shapeSegments = [];
 shape = [];
 sample = [];
-simplices = [];
+simplices=[[],[],[]];
 shapeVisible =   true;
 ballsVisible =   true;
 complexVisible = true;
@@ -21,21 +21,11 @@ function selectShape(name)	{
     // Erase drawn complexes
     //eraseComplex( );
     // Erase Hausdorff distances
-    $('.distance.label').html("");
+    //$('.distance.label').html("");
+
+    if(name !="")
+	shape=Shape[name](center);
     
-    switch(name) {
-    case "":
-	shape = [];
-	break;
-    case "circle":
-    	shape = circle(center, Math.min(...center)/2);
-	break;
-    case "lemniscate":
-    	shape = lemniscate(center, center[0]-50);
-    	break;
-    case "lissajous":
-    	shape = lissajous(center, center[0]-100, center[1]-100);
-    }
     // Draw the new shape
     shapeSegments=[shape];
     drawShape( );
@@ -63,7 +53,8 @@ function reSample(tol,size) {
 	    var r = d3.randomUniform(tol)( );
 	    var s = d3.randomUniform(2*Math.PI)( );
 	    //return [shape[i][0] + r*Math.cos(s), shape[i][1] + r*Math.sin(s)];
-	    return [shape[index][0] + r*Math.cos(s), shape[index][1] + r*Math.sin(s)];
+	    return [shape[index][0] + r*Math.cos(s), shape[index][1] +
+		    r*Math.sin(s)];
 	});
     }
     // Update Hausdorff distance
@@ -75,15 +66,24 @@ function reSample(tol,size) {
 // Computes Complexes
 var Complex = {
     rips: function(scale) {
-	simplices[0]  = d3.range(sample.length);
-	simplices[1]  = [];
-	simplices[2]  = [];
+	simplices=[d3.range(sample.length),[],[]];
 	
-	combinations(simplices[0],2).forEach(function(d) {
-    	    if ( diam2( d3.permute(sample,d) ) < scale )
-    		simplices[1].push(d);
-	});
+	adjRips = new Array(sample.length);
+	if(scale<=0)
+	    return;
 	
+	for(i = 0; i < adjRips.length; i++) {
+	    adjRips[i]= new Array(sample.length);
+	    
+	    for(j = 0; j < adjRips.length; j++) {
+		var d = dist2(sample[i],sample[j]); 
+		if( d < scale) {
+		    adjRips[i][j]=d;
+		    if(i<j)
+    	 		simplices[1].push([i,j]);
+		}
+	    }
+	}
 	combinations(simplices[0],3).forEach(function(d) {
     	    if ( diam2( d3.permute(sample,d) ) < scale )
     		simplices[2].push(d);
@@ -130,43 +130,47 @@ var Complex = {
     
 }
 
-// Lissajous
-function lissajous(center,a=100,b=100,kx=3,ky=2,n=1000) {
-    var t = d3.range(n).map(function(d) {
-  	return 2*Math.PI*d/(n-1);
-    });
-    var points = [];
-    for(var i=0; i<n; i++) {
-  	points[i] = [center[0] + a*Math.cos(kx*t[i]), 
-  	             center[1] + b*Math.sin(ky*t[i])];
+var Shape = {
+    // Lissajous
+    lissajous: function(center,a=100,b=100,kx=3,ky=2,n=500) {
+	var t = d3.range(n).map(function(d) {
+  	    return 2*Math.PI*d/(n-1);
+	});
+	var points = [];
+	for(var i=0; i<n; i++) {
+  	    points[i] = [center[0] + a*Math.cos(kx*t[i]), 
+  			 center[1] + b*Math.sin(ky*t[i])];
+	}
+	return points;
+    },
+    
+    // Lemniscate 
+    lemniscate: function(center,a,n=500) {
+	var t = d3.range(n).map(function(d) {
+  	    return 2*Math.PI*d/(n-1);
+	});
+	var points = [];
+	for(var i=0; i<n; i++) {
+  	    points[i] = [center[0] +
+			 a*Math.cos(t[i])/(1 + Math.pow(Math.sin(t[i]),2)), 
+  			 center[1] + a*Math.sin(t[i])*Math.cos(t[i])/
+			 (1 + Math.pow(Math.sin(t[i]),2))];
+	}
+	return points;
+    },
+    
+    // Circle
+    circle: function(center, radius=200, range=[0,1], n=500) {
+	var t = d3.range(n).map(function(d) {
+  	    return range[0] + (range[1]-range[0])*d/(n-1);
+	}); 
+	var points = [];
+	for(var i=0; i<n; i++) {
+  	    points[i] = [center[0] + radius*Math.cos(2*Math.PI*t[i]), 
+  			 center[1] + radius*Math.sin(2*Math.PI*t[i])];
+	}
+	return points;
     }
-    return points;
-}
-
-// Lemniscate 
-function lemniscate(center,a,n=100) {
-    var t = d3.range(n).map(function(d) {
-  	return 2*Math.PI*d/(n-1);
-    });
-    var points = [];
-    for(var i=0; i<n; i++) {
-  	points[i] = [center[0] + a*Math.cos(t[i])/(1 + Math.pow(Math.sin(t[i]),2)), 
-  	             center[1] + a*Math.sin(t[i])*Math.cos(t[i])/(1 + Math.pow(Math.sin(t[i]),2))];
-    }
-    return points;
-}
-
-// Circle
-function circle(center, radius, range=[0,1], n=100) {
-    var t = d3.range(n).map(function(d) {
-  	return range[0] + (range[1]-range[0])*d/(n-1);
-    }); 
-    var points = [];
-    for(var i=0; i<n; i++) {
-  	points[i] = [center[0] + radius*Math.cos(2*Math.PI*t[i]), 
-  	             center[1] + radius*Math.sin(2*Math.PI*t[i])];
-    }
-    return points;
 }
 
 // Compute distance of two points in 2D 
