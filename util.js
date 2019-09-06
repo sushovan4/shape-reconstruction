@@ -197,7 +197,7 @@ var Shape = {
     },
     
     // Circle
-    circle: function(center, radius=center[0]-100, range=[0,1], n=500) {
+    circle: function(center,radius=Math.min(...center)-100, range=[0,1], n=500) {
 	var t = d3.range(n).map(function(d) {
   	    return range[0] + (range[1]-range[0])*d/(n-1);
 	}); 
