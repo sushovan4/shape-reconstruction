@@ -59,7 +59,7 @@ $('document').ready(function( ) {
     ;
     $('input.rips.scale')
     	.change(function( ){
-    	    Complex[$('.complex.dropdown').dropdown('get value')]($(this).val( ));
+    	    Complex['rips']($(this).val( ));
     	    $('.ui.rips.scale.label').html($(this).val( ));
     	})
     ;

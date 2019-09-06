@@ -63,8 +63,6 @@ function reSample(tol,size) {
     // Draw the new sample
     drawSample( );
     $('input.rips.scale').trigger("change");
-    $('input.shadow.scale').val(0);
-    $('input.shadow.scale').trigger("change");
 }
 
 // Computes Complexes
@@ -101,6 +99,8 @@ var Complex = {
 	});
 	drawComplex( );
 	drawBalls(scale/2.0);
+	$('input.shadow.scale').val(0);
+	$('input.shadow.scale').trigger("change");
     },
     cech: function(scale) {
 	simplices[0]  = d3.range(sample.length);
@@ -121,7 +121,7 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
-	if(scale==0 || sample.length==0 || dEps.length==0) {
+	if(sample.length==0 || dEps.length==0) {
 	    return;
 	}
 	
@@ -197,7 +197,7 @@ var Shape = {
     },
     
     // Circle
-    circle: function(center, radius=200, range=[0,1], n=500) {
+    circle: function(center, radius=center[0]-100, range=[0,1], n=500) {
 	var t = d3.range(n).map(function(d) {
   	    return range[0] + (range[1]-range[0])*d/(n-1);
 	}); 
@@ -315,12 +315,3 @@ function saveSVG(e) {
     e.href = URL.createObjectURL(blob);
     e.download = 'drawing.svg';
 }
-
-
-// var q=[],visited=[];
-// function BFS(node,scale) {
-    
-//     var queue = [];
-//     var labeled = new Set( );
-
-// }
