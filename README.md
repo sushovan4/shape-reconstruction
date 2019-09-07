@@ -12,10 +12,16 @@ The web application uses client-side Javascritpt for all the computations. The s
 1. [Basic Definitions](#basic-definitions)
     1. Vietoris-Rips Complex
     2. Hausdorff Distance
-
+    3. Shadow Complex
 2. [Installation](#installaion)
 3. [Usage](#usage)
+    1. Select Shape
+    2. Select Sample
+    3. Build Euclidean Rips
+    4. Build Shadow
+    5. Settings
 4. [Contributing](#contributing)
+5. [Credits](#credits)
 5. [License](#license)
 
 ## Basic Definitions
