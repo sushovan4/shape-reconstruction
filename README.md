@@ -54,5 +54,5 @@ The web application does not require any extra installation besides a web-browse
 ## Credits
 
 ## License
-
+This project is licensed under MIT License; read [LICENSE](https://www.smajhi.com/shape-reconstruction/LICENSE)
 
