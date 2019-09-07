@@ -10,9 +10,11 @@ The web application uses client-side Javascritpt for all the computations. The s
 ![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
 
 
+## Table of Contents
+
 ## Basic Definitions
 
-### Vietoris-Rips Complex
+#### Vietoris-Rips Complex
 Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, the Vietoris-Rips complex renders its geometry at a positive scale <img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" />. The Vietoris-Rips complex on   
 
 
