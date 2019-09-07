@@ -9,7 +9,7 @@ The purpose of this software is to demonstrate a topological method for Euclidea
     - Vietoris-Rips Complex
     - Hausdorff Distance
     - Shadow Complex
-- [Installation](#installaion)
+- [Installation](#installation)
 - [Usage](#usage)
     - Select Shape
     - Select Sample
