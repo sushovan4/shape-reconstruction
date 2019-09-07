@@ -22,17 +22,20 @@ Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, t
 ## Usage
 
 #### Select Shape
-![website](http://www.smajhi.com/shape-reconstruction/img/shape_selection.png)
+![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
 
 #### Select Sample
-![website](http://www.smajhi.com/shape-reconstruction/img/select_sample.png)
+![website](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
 
 #### Build Euclidean Vietoris-Rips Complex
 ![website](http://www.smajhi.com/shape-reconstruction/img/rips.png)
 
+#### Build Shadow Complex
+![website](http://www.smajhi.com/shape-reconstruction/img/shadow.png)
+
 
 #### Settings
-![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
+![website](http://www.smajhi.com/shape-reconstruction/img/sidebar.png)
 
 
 ## Contributing
