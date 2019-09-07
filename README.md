@@ -3,8 +3,6 @@
 
 The purpose of this software is to demonstrate a topological method for Euclidean shape reconstrcution, which was developed and analyzed in the following paper: https://arxiv.org/abs/1810.10144. 
 
-The web application uses client-side Javascritpt for all the computations. The supported browsers include Google Chrome (>=48.0), Firefox (>=65.0), Opera, and Safari. The supported devices include Desktop, Laptop, Tablet, and Phones. Since computing rips complexes involve quadratic time operations, the app uses a ton of system CPU and RAM when the a large sample size is chosen. For this reason, **we strongly discourage the users to run the application on their phones or similar devices with very limited computational resources**.
-
 ![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
 
 
@@ -30,6 +28,7 @@ The web application uses client-side Javascritpt for all the computations. The s
 Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, the Vietoris-Rips complex renders its geometry at a positive scale <img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" />. The Vietoris-Rips complex on 
 
 ## Installation
+The web application does not require any extra installation besides a web-browser with an Internet connection. Hit the url https://www.smajhi.com/shape-reconstruction from your favorite browser to open it. The app runs client-side Javascritpt for all the computations, so you may need to enable JS engine in your browser. The supported browsers include Google Chrome (>=48.0), Firefox (>=65.0), Opera, and Safari. All the above mentioned browsers run JS by default. The supported devices include Desktop, Laptop, Tablet, and Phones. Since computing rips complexes involve quadratic time operations, the app uses a ton of system CPU and RAM when the a large sample size is chosen. For this reason, **we strongly discourage the users to run the application on their phones or similar devices with very limited computational resources**.
 
 ## Usage
 
