@@ -22,11 +22,11 @@ The purpose of this software is to demonstrate a topological method for Euclidea
 
 ## Basic Definitions
 
-#### Vietoris-Rips Complex
+- #### Vietoris-Rips Complex
 
-#### Hausdorff Distance
+- #### Hausdorff Distance
 
-#### Shadow Complex
+- #### Shadow Complex
 
 
 
@@ -45,23 +45,23 @@ The homepage consists of a navigation menu on top, below it are a white canvas o
 
 The canvas is the place where all visualizations take place. The selection tools to its right is the main user input section, where four of its subsections are stacked vertically. Each subsection is discussed below.
 
-#### Select Shape
+- #### Select Shape
 This input tool lets the user select a shape from dropdown menu shown below:
 Except for the first option, choosing other shapes immediately draws the selected shape on the canvas.
 
 ![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
 
-#### Select Sample
+- #### Select Sample
 ![website](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
 
-#### Build Euclidean Vietoris-Rips Complex
+- #### Build Euclidean Vietoris-Rips Complex
 ![website](http://www.smajhi.com/shape-reconstruction/img/build_rips.png)
 
-#### Build Shadow Complex
+- #### Build Shadow Complex
 ![website](http://www.smajhi.com/shape-reconstruction/img/build_shadow.png)
 
 
-#### Settings
+- #### Settings
 ![website](http://www.smajhi.com/shape-reconstruction/img/sidebar.png)
 
 
