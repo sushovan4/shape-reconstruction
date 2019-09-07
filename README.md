@@ -28,10 +28,10 @@ Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, t
 ![website](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
 
 #### Build Euclidean Vietoris-Rips Complex
-![website](http://www.smajhi.com/shape-reconstruction/img/rips.png)
+![website](http://www.smajhi.com/shape-reconstruction/img/build_rips.png)
 
 #### Build Shadow Complex
-![website](http://www.smajhi.com/shape-reconstruction/img/shadow.png)
+![website](http://www.smajhi.com/shape-reconstruction/img/bhild_shadow.png)
 
 
 #### Settings
