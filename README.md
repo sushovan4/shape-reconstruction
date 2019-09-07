@@ -7,20 +7,20 @@ The purpose of this software is to demonstrate a topological method for Euclidea
 
 
 ## Table of Contents
-1. [Basic Definitions](#basic-definitions)
-    1. Vietoris-Rips Complex
-    2. Hausdorff Distance
-    3. Shadow Complex
-2. [Installation](#installaion)
-3. [Usage](#usage)
-    1. Select Shape
-    2. Select Sample
-    3. Build Euclidean Rips
-    4. Build Shadow
-    5. Settings
-4. [Contributing](#contributing)
-5. [Credits](#credits)
-5. [License](#license)
+- [Basic Definitions](#basic-definitions)
+    - Vietoris-Rips Complex
+    - Hausdorff Distance
+    - Shadow Complex
+- [Installation](#installaion)
+- [Usage](#usage)
+    - Select Shape
+    - Select Sample
+    - Build Euclidean Rips
+    - Build Shadow
+    - Settings
+- [Contributing](#contributing)
+- [Credits](#credits)
+- [License](#license)
 
 ## Basic Definitions
 
