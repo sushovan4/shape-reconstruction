@@ -15,6 +15,30 @@ The web application uses client-side Javascritpt for all the computations. The s
 ## Basic Definitions
 
 #### Vietoris-Rips Complex
-Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, the Vietoris-Rips complex renders its geometry at a positive scale <img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" />. The Vietoris-Rips complex on   
+Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, the Vietoris-Rips complex renders its geometry at a positive scale <img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" />. The Vietoris-Rips complex on 
+
+## Installation
+
+## Usage
+
+#### Select Shape
+![website](http://www.smajhi.com/shape-reconstruction/img/shape_selection.png)
+
+#### Select Sample
+![website](http://www.smajhi.com/shape-reconstruction/img/select_sample.png)
+
+#### Build Euclidean Vietoris-Rips Complex
+![website](http://www.smajhi.com/shape-reconstruction/img/rips.png)
+
+
+#### Settings
+![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
+
+
+## Contributing
+
+## Credits
+
+## License
 
 
