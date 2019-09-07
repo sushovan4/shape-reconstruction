@@ -1,5 +1,3 @@
-
-
 # <img src="http://www.smajhi.com/shape-reconstruction/img/icon.png" width="50px"> Shape Reconstruction
 
 
@@ -15,17 +13,19 @@ The web application uses client-side Javascritpt for all the computations. The s
     1. Vietoris-Rips Complex
     2. Hausdorff Distance
 
-2. Installation
-3. Usage
+2. [Installation](#installaion)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [License](#license)
 
-## 1. Basic Definitions
+## Basic Definitions
 
 #### Vietoris-Rips Complex
 Given a metric space <img src="https://latex.codecogs.com/gif.latex?(S,d)" />, the Vietoris-Rips complex renders its geometry at a positive scale <img src="https://latex.codecogs.com/gif.latex?\epsilon" title="\epsilon" />. The Vietoris-Rips complex on 
 
-## 2. Installation
+## Installation
 
-## 3. Usage
+## Usage
 
 #### Select Shape
 ![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
