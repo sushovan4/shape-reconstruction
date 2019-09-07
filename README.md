@@ -41,14 +41,13 @@ in detail.
 
 The homepage consists of a navigation menu on top, below it are a white canvas on the left and selection tools on the right side. 
 
-
 ![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
 
-
-
-The canvas is the place where all visualizations take place.
+The canvas is the place where all visualizations take place. The selection tools to its right is the main user input section, where four of its subsections are stacked vertically. Each subsection is discussed below.
 
 #### Select Shape
+This input tool lets the user select a shape from dropdown menu shown below:
+Except for the first option, choosing other shapes immediately draws the selected shape on the canvas.
 
 ![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
 
