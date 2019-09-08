@@ -5,63 +5,18 @@
 
 // On DOM ready
 $('document').ready(function( ) {
-    $('.setting.item input').each(function( ){
-	$(this).val(eval($(this).data('setting')));
-    });
-    $('input.color').each(function( ){
-	$(this).css('background-color', $(this).val( ));
-    });    
-    $('input.width').each(function( ){
-	$(this).css('border', $(this).val( )+'px solid gray');
-    });
-    $('input.opacity').each(function( ){
-	$(this).css('opacity', $(this).val( ));
-    });
-
-    $('.setting.item input').change(function( ){
-	//eval($(this).data('setting'))= $(this).val( );
-    });
-    $('input.color').keyup(function( ){
-	$(this).css('background-color', $(this).val( ));
-    });
-    $('input.width').keyup(function( ){
-	$(this).css('border', $(this).val( )+'px solid gray');
-    });
-    $('input.opacity').keyup(function( ){
-	$(this).css('opacity', $(this).val( ));
-    });
-    
-    // $('#import')
-    // 	.click(function() {
-    // 	    var files = $('#selectFiles')[0].files;
-    // 	    if (files.length <= 0) {
-    // 		return false;
-    // 	    }
-	    
-    // 	    var reader = new FileReader();
-	    
-    // 	    reader.onload = function(e) { 
-    // 		var result = JSON.parse(e.target.result);
-    // 		var formatted = JSON.stringify(result, null, 2);
-    // 	    }
-	    
-    // 	    reader.readAsText(files.item(0));
-    // 	})
-    // ;
-    
+    // SVG //
     width  = $('.drawing.segment').width( );
     height = $('.drawing.segment').height( );
-
-    center = [width/2,height/2];
     
-    // Create main svg element
+    center = [width/2,height/2];
     svg = d3.select(".drawing.segment").append("svg")
     	.attr("width", width+"px")
     	.attr("height", height+"px");
 
-    $('.ui.sidebar').sidebar('attach events',  $('.toggle.item'));
     
     // Initialize dropdowns and their callbacks as needed by Semantic-UI
+    $('.ui.sidebar').sidebar('attach events',  $('.toggle.item'));
     $('.ui.dropdown')
     	.dropdown()
     ;
@@ -155,4 +110,51 @@ $('document').ready(function( ) {
     $('input.sample-size').change(function(){
     	$('.ui.size.label').html($(this).val( ));
     });
+
+    // Settings 
+    $('.setting.item input').each(function( ){
+	$(this).val(eval($(this).data('setting')));
+    });
+    $('input.color').each(function( ){
+	$(this).css('background-color', $(this).val( ));
+    });    
+    $('input.width').each(function( ){
+	$(this).css('border', $(this).val( )+'px solid gray');
+    });
+    $('input.opacity').each(function( ){
+	$(this).css('opacity', $(this).val( ));
+    });
+
+    $('.setting.item input').change(function( ){
+	//eval($(this).data('setting'))= $(this).val( );
+    });
+    $('input.color').keyup(function( ){
+	$(this).css('background-color', $(this).val( ));
+    });
+    $('input.width').keyup(function( ){
+	$(this).css('border', $(this).val( )+'px solid gray');
+    });
+    $('input.opacity').keyup(function( ){
+	$(this).css('opacity', $(this).val( ));
+    });
+
 });
+
+
+// $('#import')
+// 	.click(function() {
+// 	    var files = $('#selectFiles')[0].files;
+// 	    if (files.length <= 0) {
+// 		return false;
+// 	    }
+
+// 	    var reader = new FileReader();
+
+// 	    reader.onload = function(e) { 
+// 		var result = JSON.parse(e.target.result);
+// 		var formatted = JSON.stringify(result, null, 2);
+// 	    }
+
+// 	    reader.readAsText(files.item(0));
+// 	})
+// ;
