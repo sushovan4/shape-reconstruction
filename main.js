@@ -5,6 +5,32 @@
 
 // On DOM ready
 $('document').ready(function( ) {
+    $('.setting.item input').each(function( ){
+	$(this).val(eval($(this).data('setting')));
+    });
+    $('input.color').each(function( ){
+	$(this).css('background-color', $(this).val( ));
+    });    
+    $('input.width').each(function( ){
+	$(this).css('border', $(this).val( )+'px solid gray');
+    });
+    $('input.opacity').each(function( ){
+	$(this).css('opacity', $(this).val( ));
+    });
+
+    $('.setting.item input').change(function( ){
+	//eval($(this).data('setting'))= $(this).val( );
+    });
+    $('input.color').keyup(function( ){
+	$(this).css('background-color', $(this).val( ));
+    });
+    $('input.width').keyup(function( ){
+	$(this).css('border', $(this).val( )+'px solid gray');
+    });
+    $('input.opacity').keyup(function( ){
+	$(this).css('opacity', $(this).val( ));
+    });
+    
     // $('#import')
     // 	.click(function() {
     // 	    var files = $('#selectFiles')[0].files;
