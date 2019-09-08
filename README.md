@@ -81,12 +81,17 @@ stacked vertically. Each subsection is discussed below.
   Once a shape has been chosen in step 1, it's time to draw a sample from it.
   The sample size and noise is chosen using the sliders. Finally, pressing the
   sample button selects a random sample around the shape and draws the sample
-  points on the canvas. Add a positive noise to select a random sample every
-  time the "Sample" button is pressed.
+  points on the canvas. Add a positive noise to see the random sampling in
+  action a every time the "Sample" button is pressed.
   ![sample](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
 
 - #### Build Euclidean Vietoris-Rips Complex
-  
+
+  An "event listener" is keenly waiting to compute and draw the Vietoris-Rips
+  complex whenever any "change" of scale takes place using the slider. It's
+  actually the "shadow" of the computed Rips complex that is drawn, also the
+  adjacency matrix of the 1-skeleton the the complex is stored for future use. A
+  large sample size may slow down the computation.
   ![website](http://www.smajhi.com/shape-reconstruction/img/build_rips.png)
 
 - #### Build Shadow Complex
