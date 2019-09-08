@@ -67,18 +67,26 @@ stacked vertically. Each subsection is discussed below.
 
 - #### Shape Selection
 
-  This input tool lets the user select a shape from the dropdown
-  menu shown below: Except for the first option, choosing other shapes
-  immediately draws the selected shape on the canvas. The choices include
-  the Euclidean plane, circle, lissajous, and lemniscate. The last two of
-  the shapes are examples of non-manifolds.
-
+  This input tool lets the user select a shape from the dropdown menu shown
+  below: Except for the first option, choosing other shapes immediately draws
+  the selected shape on the canvas. The choices include the Euclidean plane,
+  circle, lissajous, and lemniscate. The last two of the shapes are examples of
+  non-manifolds. We demonstrate the gemetric reconstruct this shape from a
+  randowm sample, which we are going to select next. The selected shape is used
+  as a reference in order to check the quality of our reconstruction.
   ![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
 
 - #### Select Sample
-  ![website](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
+
+  Once a shape has been chosen in step 1, it's time to draw a sample from it.
+  The sample size and noise is chosen using the sliders. Finally, pressing the
+  sample button selects a random sample around the shape and draws the sample
+  points on the canvas. Add a positive noise to select a random sample every
+  time the "Sample" button is pressed.
+  ![sample](http://www.smajhi.com/shape-reconstruction/img/sample_select.png)
 
 - #### Build Euclidean Vietoris-Rips Complex
+  
   ![website](http://www.smajhi.com/shape-reconstruction/img/build_rips.png)
 
 - #### Build Shadow Complex
