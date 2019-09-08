@@ -51,15 +51,15 @@ phones or similar devices with very limited computational resources**.
 
 ## Usage
 
-Altough the webapp is built keeping the Euclidean (2D) shape reconstruction in mind,
-it can also be used to demontrate random sampling of a shape, Vietoris-Rips
-complexes, and vusualization of Hausdorff distance. We discuss below the
-features (so far) in detail.
+Altough the webapp is built keeping the Euclidean (2D) shape reconstruction in
+mind, it can also be used to demontrate random sampling of a shape,
+Vietoris-Rips complexes, and vusualization of Hausdorff distance. We discuss
+below the features (so far) in detail.
 
 The homepage consists of a navigation menu on top, below it are a white canvas
 on the left and selection tools on the right side.
 
-![website](http://www.smajhi.com/shape-reconstruction/img/whole.png)
+![homepage](http://www.smajhi.com/shape-reconstruction/img/whole.png)
 
 The canvas is the place where all visualizations take place. The selection tools
 to its right is the main user input section, where four of its subsections are
@@ -74,7 +74,7 @@ stacked vertically. Each subsection is discussed below.
   non-manifolds. We demonstrate the gemetric reconstruct this shape from a
   randowm sample, which we are going to select next. The selected shape is used
   as a reference in order to check the quality of our reconstruction.
-  ![website](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
+  ![shape](http://www.smajhi.com/shape-reconstruction/img/shape_select.png)
 
 - #### Select Sample
 
@@ -88,17 +88,22 @@ stacked vertically. Each subsection is discussed below.
 - #### Build Euclidean Vietoris-Rips Complex
 
   An "event listener" is keenly waiting to compute and draw the Vietoris-Rips
-  complex whenever any "change" of scale takes place using the slider. It's
+  complex whenever any "change" of scale takes place on the slider. It's
   actually the "shadow" of the computed Rips complex that is drawn, also the
   adjacency matrix of the 1-skeleton the the complex is stored for future use. A
-  large sample size may slow down the computation.
+  large sample size may slow down the computation, so please **wait a couple
+  of seconds after clicking on the slider if nothing shows up on the canvas**.
   ![website](http://www.smajhi.com/shape-reconstruction/img/build_rips.png)
 
-- #### Build Shadow Complex
+- #### Build the Proposed "Shadow" Complex
+
   ![website](http://www.smajhi.com/shape-reconstruction/img/build_shadow.png)
 
 
 - #### Settings
+
+  The toggle icon on the right of the top menu toggles the sidebar, which
+  contains different settings of the application.
   ![website](http://www.smajhi.com/shape-reconstruction/img/sidebar.png)
 
 
@@ -108,5 +113,7 @@ stacked vertically. Each subsection is discussed below.
 ## Credits
 
 ## License
-This project is licensed under the MIT License; read [LICENSE](https://www.smajhi.com/shape-reconstruction/LICENSE).
+
+This project is licensed under the MIT License; read
+[LICENSE](https://www.smajhi.com/shape-reconstruction/LICENSE).
 
