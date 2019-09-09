@@ -26,10 +26,15 @@ $('document').ready(function( ) {
     $('.ui.shape.dropdown')
     	.dropdown({
     	    onChange: function(value){
-		selectShape(value);
 		$('input.sample-size').animate({'value': 0},500,function( ){
 		    $('.sample.button').trigger('click');
+		    $('.ui.size.label').html($(this).val( ));
+		    selectShape(value);
 		});
+		$('input.rips.scale').animate({'value': 0},500,function( ){
+		    //$('.sample.button').trigger('click');
+		});
+
     	    }
     	})
     ;
@@ -37,7 +42,6 @@ $('document').ready(function( ) {
     // Other DOM events and callbacks
     $('.sample.button')
 	.click(function(){
-	    // Resample the shape
 	    reSample($('.sample-noise').val( ), $('.sample-size').val( ));
 	})
     ;
@@ -111,7 +115,7 @@ $('document').ready(function( ) {
     	$('.ui.noise.label').html($(this).val( ));
     });
     $('input.sample-size').change(function(){
-    	$('.ui.size.label').html($(this).val( ));
+	$('.ui.size.label').html($(this).val( ));
     });
 
     // Settings 

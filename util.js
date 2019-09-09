@@ -21,23 +21,18 @@ H2Visible      = false;
 
 // Compute new shape
 function selectShape(name) {
-    // Erase drawn complexes
-    //eraseComplex( );
-    // Erase Hausdorff distances
-    //$('.distance.label').html("");
-
     if(name !="")
 	shape=Shape[name](center);
-    
+    else
+	shape=[];
     // Draw the new shape
     shapeSegments=[shape];
     drawShape( );
-    $('.sample.button').trigger("click");
+    
 }
 
 // Sample the shape
 function reSample(tol,size) {
-    
     if( shape.length==0 ) {
 	sample =  d3.range(size).map(function( ) {
 	    var x = d3.randomUniform(0,width)( );
@@ -55,6 +50,7 @@ function reSample(tol,size) {
 		    r*Math.sin(s)];
 	});
     }
+    
     // Update the Hausdorff distance
     drawH2( );
     // Draw the new sample
@@ -65,10 +61,6 @@ function reSample(tol,size) {
 // Computes Complexes
 var Complex = {
     rips: function(scale) {
-	if(scale==0 || sample.length==0) {
-	    return;
-	}
-	
 	simplices=[d3.range(sample.length),[],[]];
 	adjRips = new Array(sample.length);
 	dEps = new Array(sample.length);
@@ -118,10 +110,6 @@ var Complex = {
 	drawComplex( );
     },
     shadow: function(scale) {
-	if(sample.length==0 || dEps.length==0) {
-	    return;
-	}
-	
 	shadow=[d3.range(sample.length),[],[]];
 	combinations(shadow[0],2).forEach(function(d) {
 	    if ( dEps[d[0]][d[1]] < scale)

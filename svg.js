@@ -10,7 +10,7 @@ var settings = {
     },
     sample: {
 	'fillColor' : '#566573',
-	'opactiy'   : '0.6',
+	'opacity'   : '0.6',
 	'radius'    : '3'
     },
     rips: {
