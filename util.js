@@ -37,9 +37,6 @@ function selectShape(name) {
 
 // Sample the shape
 function reSample(tol,size) {
-    if(size==0){
-	return;
-    }
     
     if( shape.length==0 ) {
 	sample =  d3.range(size).map(function( ) {

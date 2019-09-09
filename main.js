@@ -27,6 +27,9 @@ $('document').ready(function( ) {
     	.dropdown({
     	    onChange: function(value){
 		selectShape(value);
+		$('input.sample-size').animate({'value': 0},500,function( ){
+		    $('.sample.button').trigger('click');
+		});
     	    }
     	})
     ;
