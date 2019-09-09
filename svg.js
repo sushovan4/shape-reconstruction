@@ -3,34 +3,35 @@
    ...
 */
 
-// Shape params
-var shapeStrokeColor = '#3498DB';
-var shapeStrokeWidth = '1.3';
-
-// Sample params
-var sampleFillColor = '#566573';
-var sampleOpacity = '0.8';
-var sampleRadius = '3';
-
-// Edge params
-var edgeStrokeColor = '#E74C3C';
-var edgeStrokeWidth = 1.3;
-var edgeOpacity = '0.8';
-
-// Triangle params
-var triangleFillColor = '#E74C3C';
-var triangleOpacity = '0.6';
-
-// Ball params
-var ballFillColor = '#5ddd7b';
-var ballOpacity = 0.2;
-var ballStrokeColor = '#21ba45';
-var ballStrokeWidth = 2;
-
-var shadowOpacity= 0.8;
-var shadowFillColor = 'blue';
-var shadowStrokeColor = 'blue';
-var shadowStrokeWidth = 3;
+var settings = {
+    shape: {
+	'strokeColor' : '#3498DB',
+	'strokeWidth' : '1.3'
+    },
+    sample: {
+	'fillColor' : '#566573',
+	'opactiy'   : '0.6',
+	'radius'    : '3'
+    },
+    rips: {
+	'strokeColor' : '#E74C3C',
+	'strokeWidth' : '1.3',
+	'fillColor'   : '#E74C3C',
+	'opactiy'    : '0.6'
+    },
+    ball: {
+	'fillColor'   : '#5ddd7b',
+	'opacity'     : '0.2',
+	'strokeColor' : '#21ba45',
+	'strokeWidth' : '2'
+    },
+    shadow: {
+	'fillColor'   : 'blue',
+	'strokeColor' : 'blue',
+	'strokeWidth' : '3',
+	'opacity'    : '1'
+    }
+}
 
 function drawH2( ){
     var val = H2(shape,sample);
@@ -71,8 +72,8 @@ function drawSegment(segment) {
     svg.append("path")
 	.attr("class", "shape")
 	.attr("fill", "none")
-	.attr("stroke", shapeStrokeColor)
-	.attr("stroke-width", shapeStrokeWidth)
+	.attr("stroke", settings.shape.strokeColor)
+	.attr("stroke-width", settings.shape.strokeWidth)
 	.attr("d", line(segment));
 }
 
@@ -91,11 +92,11 @@ function drawSample( ) {
     	.join(enter=> enter.append("circle")).transition( ).duration(500)
 	.attr("class", "sample")
     	.attr("stroke", "none")
-    	.attr("fill", sampleFillColor)
-	.attr("opacity", sampleOpacity)
+    	.attr("fill", settings.sample.fillColor)
+	.attr("opacity", settings.sample.opacity)
     	.attr("cx", function(d) { return d[0] })
     	.attr("cy", function(d) { return d[1] })    
-    	.attr("r", sampleRadius);
+    	.attr("r", settings.sample.radius);
 }
 
 // Draw Complex
@@ -108,9 +109,9 @@ function drawComplex( ) {
 	.join(enter=> enter.append("line")).transition( )
 	.attr("class","edge")
 	.attr("fill", "none")
-	.attr("stroke", edgeStrokeColor)
-	.attr("stroke-width", edgeStrokeWidth)
-	.attr("opacity", edgeOpacity)
+	.attr("stroke", settings.rips.strokeColor)
+	.attr("stroke-width", settings.rips.strokeWidth)
+	.attr("opacity", settings.rips.opacity)
 	.attr("x1", function(d) { return sample[d[0]][0] })
 	.attr("y1", function(d) { return sample[d[0]][1] })
     	.attr("x2", function(d) { return sample[d[1]][0] })
@@ -122,8 +123,8 @@ function drawComplex( ) {
 	.join(enter=>enter.append("path")).transition( )
     	.attr("class", "triangle")
     	.attr("stroke", "none")
-    	.attr("opacity", triangleOpacity)
-    	.attr("fill", triangleFillColor)
+    	.attr("opacity", settings.rips.opacity)
+    	.attr("fill", settings.rips.fillColor)
     	.attr("d", function(d) {return line(d3.permute(sample,d))});
 }
 
@@ -136,9 +137,9 @@ function drawShadow( ) {
 	.data(shadow[1])
 	.join(enter=>enter.append("line")).transition( )
     	.attr("class", "shadow-edge")
-    	.attr("stroke", shadowStrokeColor)
-    	.attr("opacity", shadowOpacity)
-	.attr("stroke-width", shadowStrokeWidth)
+    	.attr("stroke", settings.shadow.strokeColor)
+    	.attr("opacity", settings.shadow.opacity)
+	.attr("stroke-width", settings.shadow.strokeWidth)
     	.attr("fill", "none")
 	.attr("x1", function(d) { return sample[d[0]][0] })
 	.attr("y1", function(d) { return sample[d[0]][1] })
@@ -151,8 +152,8 @@ function drawShadow( ) {
 	.join(enter=>enter.append("path")).transition( )
     	.attr("class", "shadow-triangle")
     	.attr("stroke", "none")
-    	.attr("opacity", shadowOpacity)
-    	.attr("fill", shadowFillColor)
+    	.attr("opacity", settings.shadow.opacity)
+    	.attr("fill", settings.shadow.fillColor)
     	.attr("d", function(d) {return line(d3.permute(sample,d))});
 }
 
@@ -165,10 +166,10 @@ function drawBalls(radius) {
 	.data(sample)
 	.join(enter=>enter.append("circle")).transition( ) 
 	.attr("class", "ball")
-	.attr("opacity", ballOpacity)
-	.attr("fill", ballFillColor)
-	.attr("stroke", ballStrokeColor)
-	.attr("stroke-width", ballStrokeWidth)
+	.attr("opacity", settings.ball.opacity)
+	.attr("fill", settings.ball.fillColor)
+	.attr("stroke", settings.ball.strokeColor)
+	.attr("stroke-width", settings.ball.strokeWidth)
     	.attr("cx", function(d) { return d[0] })
 	.attr("cy", function(d) { return d[1] })    
 	.attr("r", radius);	

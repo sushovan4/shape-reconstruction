@@ -116,7 +116,7 @@ $('document').ready(function( ) {
 
     // Settings 
     $('.setting.item input').each(function( ){
-	$(this).val(eval($(this).data('setting')));
+	$(this).val(settings[$(this).data('scope')][$(this).data('setting')]);
     });
     $('input.color').each(function( ){
 	$(this).css('background-color', $(this).val( ));
@@ -129,7 +129,7 @@ $('document').ready(function( ) {
     });
 
     $('.setting.item input').change(function( ){
-	//eval($(this).data('setting'))= $(this).val( );
+	settings[$(this).data('scope')][$(this).data('setting')]= $(this).val( );
     });
     $('input.color').keyup(function( ){
 	$(this).css('background-color', $(this).val( ));
@@ -140,7 +140,7 @@ $('document').ready(function( ) {
     $('input.opacity').keyup(function( ){
 	$(this).css('opacity', $(this).val( ));
     });
-
+    
 });
 
 

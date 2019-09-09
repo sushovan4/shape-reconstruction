@@ -1,4 +1,4 @@
-# <img src="http://www.smajhi.com/shape-reconstruction/img/icon.png" width="50px"> Shape Reconstruction
+# <img src="http://www.smajhi.com/shape-reconstruction/img/icon.png" width="50px">Shape Reconstruction
 
 
 The purpose of this webapp is to demonstrate a topological method for
