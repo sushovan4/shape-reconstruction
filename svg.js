@@ -17,7 +17,7 @@ var settings = {
 	'strokeColor' : '#E74C3C',
 	'strokeWidth' : '1.3',
 	'fillColor'   : '#E74C3C',
-	'opactiy'    : '0.6'
+	'opacity'    : '0.6'
     },
     ball: {
 	'fillColor'   : '#5ddd7b',
