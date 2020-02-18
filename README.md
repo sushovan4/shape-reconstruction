@@ -3,7 +3,7 @@
 
 The purpose of this webapp is to demonstrate a topological method for
 Euclidean shape reconstrcution. The method has been developed as part of my PhD thesis. The webapp runs on
-any moder web-browser on any stardard device. 
+any modern web-browser on any stardard device. 
     
     
 ## Table of Contents
