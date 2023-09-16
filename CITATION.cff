@@ -4,6 +4,7 @@ authors:
   - family-names: Majhi
     given-names: Sushovan
     orcid: https://orcid.org/0000-0001-8689-4321
-title: "My PhD Thesis Software"
+title: "Geodesic Shape Reconstruction"
 version: 1.0.0
 date-released: 2020-08-11
+url: "https://github.com/sushovan4/shape-reconstruction"
